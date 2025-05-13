@@ -1,0 +1,168 @@
+/* Estilos generales del footer */
+.site-footer {
+  background-color: #222; /* Un color oscuro como en la imagen */
+  color: #fff;
+  padding: 40px 20px; /* Espacio arriba, abajo y a los lados */
+  margin-top: 50px; /* Margen superior para separarlo del body */
+  font-family: sans-serif; /* Una fuente legible */
+  line-height: 1.6;
+  display: flex;
+  flex-wrap: wrap; /* Para que los elementos se envuelvan en pantallas pequeñas */
+  justify-content: space-around; /* Distribuye el espacio entre los bloques */
+}
+
+/* Estilos para las columnas izquierda, central y derecha */
+.footer-left,
+.footer-middle,
+.footer-right {
+  flex: 1 1 300px; /* Cada bloque ocupa al menos 300px de ancho */
+  margin-bottom: 20px; /* Espacio entre los bloques verticalmente */
+}
+
+.footer-left img {
+  max-width: 150px; /* Ajusta el tamaño del logo */
+  margin-bottom: 15px;
+}
+
+.footer-left .social-icons a {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.footer-left .social-icons img {
+  width: 24px; /* Tamaño de los iconos sociales */
+  height: 24px;
+  vertical-align: middle;
+}
+
+.quick-links h3,
+.our-services h3,
+.footer-right h3 {
+  color: #ddd; /* Un color ligeramente más claro para los títulos */
+  margin-bottom: 15px;
+}
+
+.quick-links ul,
+.our-services ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quick-links ul li,
+.our-services ul li {
+  margin-bottom: 8px;
+}
+
+.quick-links ul li a,
+.our-services ul li a {
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.quick-links ul li a:hover,
+.our-services ul li a:hover {
+  color: #fff;
+}
+
+.contact-info p {
+  margin-bottom: 10px;
+}
+
+.contact-info img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.newsletter p {
+  margin-bottom: 10px;
+}
+
+.newsletter form {
+  display: flex;
+}
+
+.newsletter input[type="email"] {
+  flex-grow: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  color: #333;
+}
+
+.newsletter button[type="submit"] {
+  background-color: #dc3545; /* Un color rojo similar al del botón */
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter button[type="submit"]:hover {
+  background-color: #c82333;
+}
+
+.newsletter button img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+/* Estilos para la parte inferior del footer (copyright) */
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #444;
+  margin-top: 30px;
+}
+
+.footer-bottom p {
+  font-size: 0.9em;
+  color: #888;
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .site-footer {
+    padding: 30px 10px;
+    flex-direction: column; /* Apila los bloques en pantallas pequeñas */
+    align-items: center; /* Centra los bloques */
+  }
+
+  .footer-left,
+  .footer-middle,
+  .footer-right {
+    width: 90%; /* Ocupan más ancho en pantallas pequeñas */
+    text-align: center;
+  }
+
+  .footer-middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .quick-links,
+  .our-services {
+    margin-bottom: 20px;
+  }
+
+  .newsletter form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .newsletter input[type="email"] {
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  .newsletter button[type="submit"] {
+    border-radius: 5px;
+  }
+}

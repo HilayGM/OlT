@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conócenos - Operador Logístico Tehuacán</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e30613;
+            --secondary: #333;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #f1f1f1;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-top {
+            background-color: var(--dark);
+            padding: 8px 0;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .contact-info a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info a i {
+            margin-right: 5px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--white);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after,
+        nav ul li a.active:after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--gray);
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-content h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            color: var(--gray);
+            font-size: 16px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Coverage Section */
+        .coverage-section {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .coverage-map {
+            position: relative;
+        }
+        
+        .coverage-map img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        .coverage-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .coverage-stat {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .stat-content h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .stat-content p {
+            color: var(--gray);
+        }
+        
+        /* States Grid */
+        .states-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 40px;
+        }
+        
+        .state-item {
+            background-color: var(--white);
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .state-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Mission Section */
+        .mission-section {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+        
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .mission-content h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+        
+        .mission-item {
+            margin-bottom: 30px;
+        }
+        
+        .mission-item h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mission-item h3 i {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+        
+        .mission-item p {
+            color: var(--gray);
+            padding-left: 30px;
+        }
+        
+        .mission-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 60px 0;
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--primary);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--dark);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+            color: #aaa;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+        
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .footer-contact li i {
+            margin-right: 10px;
+            color: var(--primary);
+            margin-top: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-grid,
+            .coverage-grid,
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image,
+            .mission-image {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .states-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+
+
+
+
+
+        /* Estilos del Footer */
+        .footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        /* Logo del footer */
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 50px;
+        }
+        
+        /* Columnas del footer */
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            color: var(--white);
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Listas en el footer */
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+        
+        /* Información de contacto */
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        .footer-contact li i {
+            margin-right: 10px;
+            color: var(--primary);
+            margin-top: 5px;
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Redes sociales */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* Boletín de noticias */
+        .newsletter-form {
+            margin-top: 20px;
+        }
+        
+        .newsletter-form p {
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .form-group input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+        }
+        
+        .form-group button {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .form-group button:hover {
+            background-color: #c00;
+        }
+        
+        /* Parte inferior del footer */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-bottom p {
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        .footer-bottom a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-column h3 {
+                margin-bottom: 15px;
+            }
+            
+            .social-links {
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <img src="https://images.unsplash.com/photo-1633409361618-c73427e4e206?ixlib=rb-4.0.3&auto=format&fit=crop&w=250&h=80&q=80" alt="Operador Logístico Tehuacán">
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="nosotros.html" class="active">Conócenos</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                        <li><a href="cotizar.html">Cotizador</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Conócenos</h1>
+            <p>Somos un operador logístico con más de 10 años de experiencia brindando soluciones de transporte y distribución en todo México.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2>OPERADOR LOGÍSTICO TEHUACÁN</h2>
+                    <p>OLT nace en Tehuacán de la mano de un grupo de profesionales del transporte, con una larga trayectoria en el sector y con una clara vocación de servicio al cliente.</p>
+                    <p>Este proyecto está fundamentado en la confianza y fidelidad de nuestros clientes, teniendo un crecimiento sostenido al desarrollar servicios y alternativas personalizadas que dan soluciones eficientes a industrias, comercios y particulares para hacer llegar, recoger y entregar.</p>
+                    <p>Nuestro compromiso es brindar un servicio de calidad, seguro y confiable, con tiempos de entrega óptimos y tarifas competitivas.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Operador Logístico Tehuacán">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coverage Section -->
+    <section class="coverage-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Cobertura Nacional OLT</h2>
+                <p>Contamos con una amplia red de distribución que nos permite llegar a todo el territorio nacional.</p>
+            </div>
+            
+            <div class="coverage-grid">
+                <div class="coverage-map">
+                    <img src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=500&q=80" alt="Mapa de cobertura">
+                </div>
+                
+                <div class="coverage-info">
+                    <div class="coverage-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>560 Destinos</h3>
+                            <p>Con recolección y entrega a domicilio en todo México.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="coverage-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>89 Destinos</h3>
+                            <p>Con entrega ocurre oficina para mayor comodidad.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="coverage-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Tiempos de entrega</h3>
+                            <p>Optimizados para cada ruta y tipo de servicio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="states-grid">
+                <div class="state-item">Aguascalientes</div>
+                <div class="state-item">Baja California</div>
+                <div class="state-item">Baja California Sur</div>
+                <div class="state-item">Campeche</div>
+                <div class="state-item">Chiapas</div>
+                <div class="state-item">Chihuahua</div>
+                <div class="state-item">Ciudad de México</div>
+                <div class="state-item">Coahuila</div>
+                <div class="state-item">Colima</div>
+                <div class="state-item">Durango</div>
+                <div class="state-item">Estado de México</div>
+                <div class="state-item">Guanajuato</div>
+                <div class="state-item">Guerrero</div>
+                <div class="state-item">Hidalgo</div>
+                <div class="state-item">Jalisco</div>
+                <div class="state-item">Michoacán</div>
+                <div class="state-item">Morelos</div>
+                <div class="state-item">Nayarit</div>
+                <div class="state-item">Nuevo León</div>
+                <div class="state-item">Oaxaca</div>
+                <div class="state-item">Puebla</div>
+                <div class="state-item">Querétaro</div>
+                <div class="state-item">Quintana Roo</div>
+                <div class="state-item">San Luis Potosí</div>
+                <div class="state-item">Sinaloa</div>
+                <div class="state-item">Sonora</div>
+                <div class="state-item">Tabasco</div>
+                <div class="state-item">Tamaulipas</div>
+                <div class="state-item">Tlaxcala</div>
+                <div class="state-item">Veracruz</div>
+                <div class="state-item">Yucatán</div>
+                <div class="state-item">Zacatecas</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-grid">
+                <div class="mission-content">
+                    <h2>Nuestra Misión y Compromisos</h2>
+                    
+                    <div class="mission-item">
+                        <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3>
+                        <p>Asegurar la satisfacción de nuestros clientes, ofreciendo servicios y cobertura con los tiempos adecuados de entrega, siendo así el enlace estratégico entre nuestros clientes al brindar un servicio Confiable, Seguro y Flexible.</p>
+                    </div>
+                    
+                    <div class="mission-item">
+                        <h3><i class="fas fa-handshake"></i> Compromisos con Nuestros Clientes</h3>
+                        <p>En OLT contamos con procedimientos y estándares de calidad muy rigurosos, para asegurar a nuestros clientes la trazabilidad y seguridad total de sus mercancías. Nuestro equipo trabaja de manera activa para solucionar cualquier incidencia que obstaculice la entrega de sus envíos, manteniendo comunicación constante para lograr que llegue la comunicación entre sus distintos puntos de distribución, mejorando día a día la calidad de los procesos y aumentando la rapidez en el servicio.</p>
+                    </div>
+                </div>
+                
+                <div class="mission-image">
+                    <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Equipo OLT">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Necesitas una cotización?</h2>
+            <p>Si deseas saber el tiempo de entrega de un origen y un punto de entrega distinto, ve a contacto y elige a un asesor logístico para recibir toda la información que necesitas.</p>
+            <a href="cotizar.html" class="cta-button">Cotiza ahora</a>
+        </div>
+    </section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <!-- Columna 1: Sobre nosotros -->
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <img src="https://images.unsplash.com/photo-1633409361618-c73427e4e206?ixlib=rb-4.0.3&auto=format&fit=crop&w=250&h=80&q=80" alt="Operador Logístico Tehuacán">
+                </div>
+                <p>Operador Logístico Tehuacán es una empresa dedicada al transporte y distribución de mercancías a nivel nacional, con más de 10 años de experiencia en el sector.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <!-- Columna 2: Enlaces rápidos -->
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="nosotros.html">Conócenos</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="actualizaciones.html">Actualizaciones</a></li>
+                    <li><a href="cotizar.html">Cotizador</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+            
+            <!-- Columna 3: Servicios -->
+            <div class="footer-column">
+                <h3>Nuestros Servicios</h3>
+                <ul>
+                    <li><a href="#">Paquetería</a></li>
+                    <li><a href="#">Carga Consolidada</a></li>
+                    <li><a href="#">Recolección a Domicilio</a></li>
+                    <li><a href="#">Embalaje</a></li>
+                    <li><a href="#">Fletes y Mudanzas</a></li>
+                    <li><a href="#">Acuses de Recibo</a></li>
+                    <li><a href="#">Seguro de Mercancías</a></li>
+                </ul>
+            </div>
+            
+            <!-- Columna 4: Contacto -->
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <ul class="footer-contact">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Calle Cuauhtémoc #123, Centro, Tehuacán, Puebla, México</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>(238) 383 0123</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>contacto@olt.com.mx</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Lun-Vie: 9am-6pm</span>
+                    </li>
+                </ul>
+                
+                <!-- Boletín de noticias -->
+                <div class="newsletter-form">
+                    <p>Suscríbete a nuestro boletín</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Tu correo electrónico">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Parte inferior del footer -->
+        <div class="footer-bottom">
+            <p>© 2025 <a href="#">Operador Logístico Tehuacán</a>. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

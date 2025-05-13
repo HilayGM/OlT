@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios - Operador Logístico Tehuacán</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e30613;
+            --secondary: #333;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #f1f1f1;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-top {
+            background-color: var(--dark);
+            padding: 8px 0;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .contact-info a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info a i {
+            margin-right: 5px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--white);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after,
+        nav ul li a.active:after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--gray);
+        }
+        
+        /* Services Overview */
+        .services-overview {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .service-icon {
+            height: 120px;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 40px;
+        }
+        
+        .service-content {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .service-content h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .service-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            min-height: 80px;
+        }
+        
+        .service-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .service-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -3px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .service-link:hover:after {
+            width: 100%;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: block;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--primary);
+        }
+        
+        .modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .modal-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 20px;
+        }
+        
+        .modal-title {
+            font-size: 28px;
+            color: var(--primary);
+        }
+        
+        .modal-body p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .modal-body ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+        
+        .modal-body ul li {
+            margin-bottom: 10px;
+        }
+        
+        .modal-footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .modal-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button.primary {
+            background-color: var(--white);
+            color: var(--primary);
+        }
+        
+        .cta-button.secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+            color: #aaa;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+        
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .footer-contact li i {
+            margin-right: 10px;
+            color: var(--primary);
+            margin-top: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 30px;
+                margin: 20% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Top -->
+
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <img src="https://images.unsplash.com/photo-1633409361618-c73427e4e206?ixlib=rb-4.0.3&auto=format&fit=crop&w=250&h=80&q=80" alt="Operador Logístico Tehuacán">
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="nosotros.html">Conócenos</a></li>
+                        <li><a href="servicios.html" class="active">Servicios</a></li>
+                        <li><a href="cotizar.html">Cotizador</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Nuestros Servicios</h1>
+            <p>Ofrecemos soluciones logísticas integrales adaptadas a las necesidades específicas de cada cliente.</p>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="services-overview">
+        <div class="container">
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Paquetería</h3>
+                        <p>Servicio de envío de paquetes de cualquier tamaño a nivel nacional con seguimiento en tiempo real.</p>
+                        <a class="service-link" data-service="paqueteria">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Carga Consolidada</h3>
+                        <p>Optimiza tus costos de envío agrupando mercancías con destinos similares en un solo transporte.</p>
+                        <a class="service-link" data-service="carga-consolidada">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Recolección a Domicilio</h3>
+                        <p>Recogemos tus envíos directamente en tu domicilio u oficina para mayor comodidad.</p>
+                        <a class="service-link" data-service="recoleccion">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Embalaje</h3>
+                        <p>Servicio profesional de embalaje para proteger tus mercancías durante el transporte.</p>
+                        <a class="service-link" data-service="embalaje">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-truck-moving"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Fletes y Mudanzas</h3>
+                        <p>Transporte de mercancías de gran volumen y servicios de mudanza a nivel nacional.</p>
+                        <a class="service-link" data-service="fletes">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Acuses de Recibo</h3>
+                        <p>Confirmación de entrega con firma del destinatario para mayor seguridad y control.</p>
+                        <a class="service-link" data-service="acuses">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Ocurre</h3>
+                        <p>Servicio donde el destinatario recoge su paquete en nuestras oficinas cuando le resulte conveniente.</p>
+                        <a class="service-link" data-service="ocurre">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pallet"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Pallet (Tarima)</h3>
+                        <p>Transporte de mercancías paletizadas para envíos de gran volumen o peso.</p>
+                        <a class="service-link" data-service="pallet">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Seguro de Mercancías</h3>
+                        <p>Protección adicional para tus envíos contra pérdidas, daños o robos durante el transporte.</p>
+                        <a class="service-link" data-service="seguro">Más información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Details -->
+    <!--
+    <section class="service-details">
+        <div class="container">
+            <div class="section-title">
+                <h2>Detalles de Nuestros Servicios</h2>
+                <p>Conoce a fondo cada uno de nuestros servicios y cómo pueden beneficiar a tu negocio.</p>
+            </div>
+            
+            <div class="details-grid">
+                <div class="left-column">
+                    <div class="detail-item" id="paqueteria">
+                        <h3><i class="fas fa-box"></i> Paquetería</h3>
+                        <p>Nuestro servicio de paquetería ofrece soluciones para el envío de paquetes de cualquier tamaño a nivel nacional. Contamos con una amplia red de distribución que nos permite llegar a cualquier punto del país con tiempos de entrega óptimos.</p>
+                        <ul>
+                            <li>Envíos de 1 kg hasta 70 kg</li>
+                            <li>Seguimiento en tiempo real</li>
+                            <li>Notificaciones de entrega</li>
+                            <li>Tarifas competitivas</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-item" id="carga-consolidada">
+                        <h3><i class="fas fa-truck"></i> Carga Consolidada</h3>
+                        <p>La carga consolidada es una solución ideal para optimizar costos de envío. Consiste en agrupar mercancías de diferentes clientes con destinos similares en un solo transporte, lo que permite reducir costos y tiempos de entrega.</p>
+                        <ul>
+                            <li>Reducción de costos de transporte</li>
+                            <li>Menor impacto ambiental</li>
+                            <li>Ideal para envíos frecuentes</li>
+                            <li>Disponible para todo tipo de mercancías</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-item" id="recoleccion">
+                        <h3><i class="fas fa-home"></i> Recolección a Domicilio</h3>
+                        <p>Ofrecemos el servicio de recolección a domicilio para mayor comodidad de nuestros clientes. Un operador se presentará en la dirección indicada para recoger los paquetes o mercancías que desees enviar.</p>
+                        <ul>
+                            <li>Programación de recolección</li>
+                            <li>Servicio disponible en todo el país</li>
+                            <li>Ahorro de tiempo y desplazamientos</li>
+                            <li>Confirmación de recolección</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-item" id="embalaje">
+                        <h3><i class="fas fa-box-open"></i> Embalaje</h3>
+                        <p>Contamos con un servicio profesional de embalaje para proteger tus mercancías durante el transporte. Utilizamos materiales de alta calidad y técnicas adecuadas según el tipo de producto a transportar.</p>
+                        <ul>
+                            <li>Embalaje personalizado</li>
+                            <li>Materiales de protección</li>
+                            <li>Etiquetado profesional</li>
+                            <li>Asesoría en embalaje especial</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-item" id="fletes">
+                        <h3><i class="fas fa-truck-moving"></i> Fletes y Mudanzas</h3>
+                        <p>Nuestro servicio de fletes y mudanzas está diseñado para el transporte de mercancías de gran volumen o para traslados completos de oficinas y hogares. Contamos con vehículos de diferentes capacidades para adaptarnos a tus necesidades.</p>
+                        <ul>
+                            <li>Fletes locales y nacionales</li>
+                            <li>Mudanzas residenciales y comerciales</li>
+                            <li>Personal capacitado</li>
+                            <li>Servicio de carga y descarga</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="right-column">
+                    <div class="detail-item" id="acuses">
+                        <h3><i class="fas fa-clipboard-check"></i> Acuses de Recibo</h3>
+                        <p>El servicio de acuses de recibo proporciona una confirmación de entrega con la firma del destinatario. Este servicio es ideal para envíos de documentos importantes o mercancías de valor que requieren un control estricto.</p>
+                        <ul>
+                            <li>Confirmación de entrega</li>
+                            <li>Firma del destinatario</li>
+                            <li>Acceso a comprobantes digitales</li>
+                            <li>Mayor seguridad en tus envíos</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-item" id="ocurre">
+                        <h3><i class="fas fa-building"></i> Ocurre</h3>
+                        <p>El servicio "Ocurre" permite que el destinatario recoja su paquete en nuestras oficinas cuando le resulte conveniente. Es una excelente opción cuando no hay nadie disponible para recibir el envío en el domicilio o se requiere mayor flexibilidad.</p>
+                        <ul>
+                            <li>Flexibilidad de horarios</li>
+                            <li>Notificación de disponibilidad</li>
+                            <li>Identificación requerida para recoger</li>
+                            <li>Almacenamiento seguro</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-item" id="pallet">
+                        <h3><i class="fas fa-pallet"></i> Pallet (Tarima)</h3>
+                        <p>El servicio de transporte de pallets o tarimas está diseñado para el envío de mercancías paletizadas. Es ideal para envíos de gran volumen o peso que requieren un manejo especial con montacargas o equipos de carga.</p>
+                        <ul>
+                            <li>Transporte de mercancía paletizada</li>
+                            <li>Manejo con equipo especializado</li>
+                            <li>Optimización de espacio</li>
+                            <li>Ideal para envíos industriales</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-item" id="seguro">
+                        <h3><i class="fas fa-shield-alt"></i> Seguro de Mercancías</h3>
+                        <p>Ofrecemos seguros para tus envíos que brindan protección adicional contra pérdidas, daños o robos durante el transporte. Es una opción recomendada para mercancías de valor o envíos críticos para tu negocio.</p>
+                        <ul>
+                            <li>Cobertura contra daños</li>
+                            <li>Protección contra robos</li>
+                            <li>Indemnización por pérdidas</li>
+                            <li>Diferentes niveles de cobertura</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <h3><i class="fas fa-star"></i> Servicios Adicionales</h3>
+                        <p>Además de nuestros servicios principales, ofrecemos soluciones complementarias para satisfacer todas tus necesidades logísticas:</p>
+                        <ul>
+                            <li>Asesoría logística personalizada</li>
+                            <li>Servicios express y prioritarios</li>
+                            <li>Logística inversa (devoluciones)</li>
+                            <li>Almacenaje temporal</li>
+                            <li>Distribución de última milla</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Listo para enviar?</h2>
+            <p>Contáctanos hoy mismo para obtener una cotización personalizada o para resolver cualquier duda sobre nuestros servicios.</p>
+            <div class="cta-buttons">
+                <a href="cotizar.html" class="cta-button primary">Solicitar cotización</a>
+                <a href="tel:+522383830123" class="cta-button secondary">Llamar ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i id="modalIcon" class="fas"></i>
+                </div>
+                <h2 class="modal-title" id="modalTitle"></h2>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+            <div class="modal-footer">
+                <a href="cotizar.html" class="modal-button">Solicitar cotización</a>
+            </div>
+        </div>
+    </div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <!-- Columna 1: Sobre nosotros -->
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <img src="https://images.unsplash.com/photo-1633409361618-c73427e4e206?ixlib=rb-4.0.3&auto=format&fit=crop&w=250&h=80&q=80" alt="Operador Logístico Tehuacán">
+                </div>
+                <p>Operador Logístico Tehuacán es una empresa dedicada al transporte y distribución de mercancías a nivel nacional, con más de 10 años de experiencia en el sector.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <!-- Columna 2: Enlaces rápidos -->
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="nosotros.html">Conócenos</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="actualizaciones.html">Actualizaciones</a></li>
+                    <li><a href="cotizar.html">Cotizador</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+            
+            <!-- Columna 3: Servicios -->
+            <div class="footer-column">
+                <h3>Nuestros Servicios</h3>
+                <ul>
+                    <li><a href="#">Paquetería</a></li>
+                    <li><a href="#">Carga Consolidada</a></li>
+                    <li><a href="#">Recolección a Domicilio</a></li>
+                    <li><a href="#">Embalaje</a></li>
+                    <li><a href="#">Fletes y Mudanzas</a></li>
+                    <li><a href="#">Acuses de Recibo</a></li>
+                    <li><a href="#">Seguro de Mercancías</a></li>
+                </ul>
+            </div>
+            
+            <!-- Columna 4: Contacto -->
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <ul class="footer-contact">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Calle Cuauhtémoc #123, Centro, Tehuacán, Puebla, México</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>(238) 383 0123</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>contacto@olt.com.mx</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Lun-Vie: 9am-6pm</span>
+                    </li>
+                </ul>
+                
+                <!-- Boletín de noticias -->
+                <div class="newsletter-form">
+                    <p>Suscríbete a nuestro boletín</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Tu correo electrónico">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Parte inferior del footer -->
+        <div class="footer-bottom">
+            <p>© 2025 <a href="#">Operador Logístico Tehuacán</a>. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        // Service details data
+        const serviceDetails = {
+            'paqueteria': {
+                title: 'Paquetería',
+                icon: 'fa-box',
+                description: 'Nuestro servicio de paquetería ofrece soluciones para el envío de paquetes de cualquier tamaño a nivel nacional. Contamos con una amplia red de distribución que nos permite llegar a cualquier punto del país con tiempos de entrega óptimos.',
+                features: [
+                    'Envíos de 1 kg hasta 70 kg',
+                    'Seguimiento en tiempo real',
+                    'Notificaciones de entrega',
+                    'Tarifas competitivas'
+                ]
+            },
+            'carga-consolidada': {
+                title: 'Carga Consolidada',
+                icon: 'fa-truck',
+                description: 'La carga consolidada es una solución ideal para optimizar costos de envío. Consiste en agrupar mercancías de diferentes clientes con destinos similares en un solo transporte, lo que permite reducir costos y tiempos de entrega.',
+                features: [
+                    'Reducción de costos de transporte',
+                    'Menor impacto ambiental',
+                    'Ideal para envíos frecuentes',
+                    'Disponible para todo tipo de mercancías'
+                ]
+            },
+            'recoleccion': {
+                title: 'Recolección a Domicilio',
+                icon: 'fa-home',
+                description: 'Ofrecemos el servicio de recolección a domicilio para mayor comodidad de nuestros clientes. Un operador se presentará en la dirección indicada para recoger los paquetes o mercancías que desees enviar.',
+                features: [
+                    'Programación de recolección',
+                    'Servicio disponible en todo el país',
+                    'Ahorro de tiempo y desplazamientos',
+                    'Confirmación de recolección'
+                ]
+            },
+            'embalaje': {
+                title: 'Embalaje',
+                icon: 'fa-box-open',
+                description: 'Contamos con un servicio profesional de embalaje para proteger tus mercancías durante el transporte. Utilizamos materiales de alta calidad y técnicas adecuadas según el tipo de producto a transportar.',
+                features: [
+                    'Embalaje personalizado',
+                    'Materiales de protección',
+                    'Etiquetado profesional',
+                    'Asesoría en embalaje especial'
+                ]
+            },
+            'fletes': {
+                title: 'Fletes y Mudanzas',
+                icon: 'fa-truck-moving',
+                description: 'Nuestro servicio de fletes y mudanzas está diseñado para el transporte de mercancías de gran volumen o para traslados completos de oficinas y hogares. Contamos con vehículos de diferentes capacidades para adaptarnos a tus necesidades.',
+                features: [
+                    'Fletes locales y nacionales',
+                    'Mudanzas residenciales y comerciales',
+                    'Personal capacitado',
+                    'Servicio de carga y descarga'
+                ]
+            },
+            'acuses': {
+                title: 'Acuses de Recibo',
+                icon: 'fa-clipboard-check',
+                description: 'El servicio de acuses de recibo proporciona una confirmación de entrega con la firma del destinatario. Este servicio es ideal para envíos de documentos importantes o mercancías de valor que requieren un control estricto.',
+                features: [
+                    'Confirmación de entrega',
+                    'Firma del destinatario',
+                    'Acceso a comprobantes digitales',
+                    'Mayor seguridad en tus envíos'
+                ]
+            },
+            'ocurre': {
+                title: 'Ocurre',
+                icon: 'fa-building',
+                description: 'El servicio "Ocurre" permite que el destinatario recoja su paquete en nuestras oficinas cuando le resulte conveniente. Es una excelente opción cuando no hay nadie disponible para recibir el envío en el domicilio o se requiere mayor flexibilidad.',
+                features: [
+                    'Flexibilidad de horarios',
+                    'Notificación de disponibilidad',
+                    'Identificación requerida para recoger',
+                    'Almacenamiento seguro'
+                ]
+            },
+            'pallet': {
+                title: 'Pallet (Tarima)',
+                icon: 'fa-pallet',
+                description: 'El servicio de transporte de pallets o tarimas está diseñado para el envío de mercancías paletizadas. Es ideal para envíos de gran volumen o peso que requieren un manejo especial con montacargas o equipos de carga.',
+                features: [
+                    'Transporte de mercancía paletizada',
+                    'Manejo con equipo especializado',
+                    'Optimización de espacio',
+                    'Ideal para envíos industriales'
+                ]
+            },
+            'seguro': {
+                title: 'Seguro de Mercancías',
+                icon: 'fa-shield-alt',
+                description: 'Ofrecemos seguros para tus envíos que brindan protección adicional contra pérdidas, daños o robos durante el transporte. Es una opción recomendada para mercancías de valor o envíos críticos para tu negocio.',
+                features: [
+                    'Cobertura contra daños',
+                    'Protección contra robos',
+                    'Indemnización por pérdidas',
+                    'Diferentes niveles de cobertura'
+                ]
+            }
+        };
+
+        // Get modal elements
+        const modal = document.getElementById('serviceModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalBody = document.getElementById('modalBody');
+        const closeModal = document.querySelector('.close-modal');
+
+        // Add event listeners to all service links
+        document.querySelectorAll('.service-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const serviceId = this.getAttribute('data-service');
+                openServiceModal(serviceId);
+            });
+        });
+
+        // Close modal when clicking on close button
+        closeModal.addEventListener('click', function() {
+            closeServiceModal();
+        });
+
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeServiceModal();
+            }
+        });
+
+        // Function to open modal with service details
+        function openServiceModal(serviceId) {
+            const service = serviceDetails[serviceId];
+            
+            if (service) {
+                // Set modal content
+                modalTitle.textContent = service.title;
+                modalIcon.className = `fas ${service.icon}`;
+                
+                // Build modal body content
+                let bodyContent = `<p>${service.description}</p>`;
+                
+                if (service.features && service.features.length > 0) {
+                    bodyContent += '<ul>';
+                    service.features.forEach(feature => {
+                        bodyContent += `<li>${feature}</li>`;
+                    });
+                    bodyContent += '</ul>';
+                }
+                
+                modalBody.innerHTML = bodyContent;
+                
+                // Show modal with animation
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+        }
+
+        // Function to close modal
+        function closeServiceModal() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modalBody.innerHTML = '';
+            }, 300);
+            document.body.style.overflow = ''; // Re-enable scrolling
+        }
+    </script>
+</body>
+</html>

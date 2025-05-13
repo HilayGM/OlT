@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operador Logístico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        /* Header */
+        header {
+            background-color: #e30613;
+            color: white;
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .back-button {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-color: #e30613;
+            color: white;
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 32px;
+            max-width: 600px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        /* Quick Links */
+        .quick-links {
+            background-color: #e30613;
+            padding: 15px 0;
+        }
+        
+        .quick-links-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .quick-link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        
+        .quick-link i {
+            margin-right: 5px;
+        }
+        
+        /* About Section */
+        .about {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 40px;
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .about h2 {
+            color: #e30613;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .about p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        /* Stats Section */
+        .stats {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+        
+        .stat-item {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .stat-icon {
+            font-size: 40px;
+            color: #e30613;
+            margin-bottom: 15px;
+        }
+        
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e30613;
+            margin-bottom: 5px;
+        }
+        
+        .stat-text {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: #e30613;
+            padding: 40px 0;
+        }
+        
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .services h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        
+        .service-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .service-card {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .service-image {
+            height: 150px;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .service-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .service-content h3 {
+            color: #e30613;
+            margin-bottom: 10px;
+        }
+        
+        .service-content p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .service-button {
+            display: inline-block;
+            background-color: #e30613;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        /* Locations Section */
+        .locations {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .locations h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .locations-content {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .locations-text {
+            flex: 1;
+        }
+        
+        .location-item {
+            margin-bottom: 20px;
+        }
+        
+        .location-item h3 {
+            color: #e30613;
+            margin-bottom: 10px;
+        }
+        
+        .location-item p {
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .locations-map {
+            flex: 1;
+        }
+        
+        .locations-map img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #e30613;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo img {
+            max-width: 250px;
+        }
+        
+        .footer-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-item i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .footer-copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#">INICIO</a></li>
+                    <li><a href="#">NOSOTROS</a></li>
+                    <li><a href="#">SERVICIOS</a></li>
+                    <li><a href="#">ACTUALIZACIONES</a></li>
+                    <li><a href="#">CONTACTO</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="/placeholder.svg?height=400&width=1200" alt="Camión de reparto" class="hero-image">
+        <div class="hero-content">
+            <h1>Paquetería sin guías prepagadas de tehuacán para todo el país</h1>
+        </div>
+    </section>
+
+    <!-- Quick Links -->
+    <div class="quick-links">
+        <div class="quick-links-container">
+            <a href="#" class="quick-link">
+                <i class="fas fa-box"></i> Cargas consolidadas
+            </a>
+            <a href="#" class="quick-link">
+                <i class="fas fa-truck"></i> Flota Propia
+            </a>
+            <a href="#" class="quick-link">
+                <i class="fas fa-warehouse"></i> Depósitos de valores
+            </a>
+            <a href="#" class="quick-link">
+                <i class="fab fa-whatsapp"></i> Seguir mi mercancía
+            </a>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="about-content">
+            <h2>SOMOS Operador Logístico Tehuacán</h2>
+            <p>Somos una empresa dedicada a brindar servicios de logística y transporte de mercancías a nivel nacional. Contamos con más de 10 años de experiencia en el sector.</p>
+            <p>Nuestro compromiso es ofrecer soluciones eficientes y seguras para el transporte de sus productos, garantizando la entrega en tiempo y forma.</p>
+            
+            <div class="contact-info">
+                <p>+52 (238) 383 0123</p>
+                <p>contacto@olt.com.mx</p>
+            </div>
+        </div>
+        <div class="about-image">
+            <img src="/placeholder.svg?height=300&width=500" alt="Camión logístico">
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat-item">
+            <div class="stat-icon">
+                <i class="fas fa-box"></i>
+            </div>
+            <div class="stat-number">1729</div>
+            <div class="stat-text">ENVÍOS MENSUALES</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="stat-number">350</div>
+            <div class="stat-text">DESTINOS EN TODO MÉXICO</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="stat-number">89</div>
+            <div class="stat-text">EMPRESAS CONFÍAN EN NOSOTROS</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">
+                <i class="fas fa-globe"></i>
+            </div>
+            <div class="stat-number">24/7</div>
+            <div class="stat-text">SERVICIO DISPONIBLE</div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="services-container">
+            <h2>SERVICIOS OLT</h2>
+            <div class="service-cards">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/placeholder.svg?height=150&width=400" alt="Paquetería de mercancías">
+                    </div>
+                    <div class="service-content">
+                        <h3>Paquetería de mercancías</h3>
+                        <p>Servicio de entrega de paquetes y mercancías a nivel nacional con seguimiento en tiempo real.</p>
+                        <a href="#" class="service-button">Ver más</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/placeholder.svg?height=150&width=400" alt="Paquetería">
+                    </div>
+                    <div class="service-content">
+                        <h3>Paquetería</h3>
+                        <p>Envío de paquetes de cualquier tamaño con servicio puerta a puerta en todo el país.</p>
+                        <a href="#" class="service-button">Ver más</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/placeholder.svg?height=150&width=400" alt="Envío de mercancías">
+                    </div>
+                    <div class="service-content">
+                        <h3>ENVÍO DE MERCANCÍAS</h3>
+                        <p>Transporte seguro de mercancías con seguros incluidos y garantía de entrega.</p>
+                        <a href="#" class="service-button">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section class="locations">
+        <h2>Nuestras Ubicaciones</h2>
+        <div class="locations-content">
+            <div class="locations-text">
+                <div class="location-item">
+                    <h3>Tehuacán</h3>
+                    <p>Somos una empresa de logística en Tehuacán y servimos a todo el país. Contamos con oficinas para atender tus envíos en toda la República Mexicana.</p>
+                </div>
+                <div class="location-item">
+                    <h3>Oficina Central</h3>
+                    <p>Dirección: Calle Cuauhtémoc #123, Centro, Tehuacán, Puebla, México</p>
+                    <p>Teléfono: (238) 383 0123</p>
+                    <p>Email: contacto@olt.com.mx</p>
+                </div>
+            </div>
+            <div class="locations-map">
+                <img src="/placeholder.svg?height=300&width=500" alt="Mapa de ubicaciones">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="/placeholder.svg?height=80&width=250" alt="Logo Operador Logístico">
+            </div>
+            <div class="footer-info">
+                <div class="footer-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <p>Calle Cuauhtémoc #123</p>
+                        <p>Tehuacán, Puebla</p>
+                    </div>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <p>(238) 383 0123</p>
+                        <p>Lun-Vie: 9am-6pm</p>
+                    </div>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <p>contacto@olt.com.mx</p>
+                        <p>soporte@olt.com.mx</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>© 2025 Operador Logístico Tehuacán. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
