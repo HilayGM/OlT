@@ -3,13 +3,14 @@
 /* Hero Section */
 .hero {
   background-color: #e30613;
-  padding: 60px 20px;
+  padding: 10px 20px;
   color: white;
   text-align: center;
+  position: relative;
 }
 
 .heroContainer {
-  max-width: 800px;
+  max-width: 80vh;
   margin: 0 auto;
 }
 
@@ -40,13 +41,14 @@
 
 /* Agents Section */
 .agents {
-  padding: 60px 20px;
+  padding: 10px 20px;
   background-color: #f5f5f5;
 }
 
 .sectionTitle {
   text-align: center;
   margin-bottom: 40px;
+  margin: 10px;
 }
 
 .sectionTitle h2 {
