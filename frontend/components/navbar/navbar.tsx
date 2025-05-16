@@ -1,6 +1,8 @@
 import React from 'react';
 import "./Navbar.css"; // Importamos estilos puros
 import { FaBars, FaSearch, FaHeart, FaUser } from "react-icons/fa";
+import { Link } from 'react-router-dom'; // Importamos Link de react-router-dom para navegación
+import Cotizador from '../../src/app/cotizador/page';
 
 function NavbarComponent(){
     return(
@@ -13,10 +15,10 @@ function NavbarComponent(){
                 </a>
                 <nav>
                     <ul>
-                        <li><a href="index.html" className="active">Inicio</a></li>
+                        <li><a href="/" >Inicio</a></li>
                         <li><a href="nosotros.html" >Conócenos</a></li>
                         <li><a href="servicios.html">Servicios</a></li>
-                        <li><a href="cotizar.html">Cotizador</a></li>
+                        <li><a href="/cotizador">Cotizador</a></li>
                     </ul>
                 </nav>
             </div>

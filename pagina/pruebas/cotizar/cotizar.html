@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./cotizar.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Cotiza tu envío en minutos</h1>
+            <p>Obtén una cotización rápida y personalizada para tus envíos de mercancía. Nuestro equipo de expertos te atenderá directamente por WhatsApp.</p>
+            <div class="whatsapp-badge">
+                <i class="fab fa-whatsapp"></i> Cotización vía WhatsApp
+            </div>
+        </div>
+    </section>
+
+    <!-- Agents Section -->
+    <section class="agents">
+        <div class="section-title">
+            <h2>Nuestro equipo está listo para ayudarte</h2>
+            <p>Estos son los agentes que te atenderán personalmente para resolver todas tus dudas y brindarte la mejor cotización.</p>
+        </div>
+        
+        <div class="agents-grid">
+            <div class="agent-card">
+                <div class="agent-image">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=500&q=80" alt="Carlos Rodríguez">
+                </div>
+                <div class="agent-info">
+                    <h3>Carlos Rodríguez</h3>
+                    <p>Especialista en envíos nacionales</p>
+                    <div class="agent-contact">
+                        <a href="tel:+522381234567" class="phone">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                        <a href="https://wa.me/522381234567" class="whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:carlos@olt.com.mx" class="email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="agent-card">
+                <div class="agent-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=500&q=80" alt="Laura Méndez">
+                </div>
+                <div class="agent-info">
+                    <h3>Laura Méndez</h3>
+                    <p>Coordinadora de logística</p>
+                    <div class="agent-contact">
+                        <a href="tel:+522387654321" class="phone">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                        <a href="https://wa.me/522387654321" class="whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:laura@olt.com.mx" class="email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="agent-card">
+                <div class="agent-image">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=500&q=80" alt="Miguel Ángel Torres">
+                </div>
+                <div class="agent-info">
+                    <h3>Miguel Ángel Torres</h3>
+                    <p>Especialista en carga pesada</p>
+                    <div class="agent-contact">
+                        <a href="tel:+522389876543" class="phone">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                        <a href="https://wa.me/522389876543" class="whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:miguel@olt.com.mx" class="email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="agent-card">
+                <div class="agent-image">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=500&q=80" alt="Ana García">
+                </div>
+                <div class="agent-info">
+                    <h3>Ana García</h3>
+                    <p>Atención a clientes corporativos</p>
+                    <div class="agent-contact">
+                        <a href="tel:+522383456789" class="phone">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                        <a href="https://wa.me/522383456789" class="whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:ana@olt.com.mx" class="email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Form Section -->
+    <section class="quote-form">
+        <div class="form-container">
+            <div class="form-title">
+                <h2>Solicita tu cotización</h2>
+                <p>Completa el formulario y te enviaremos tu cotización por WhatsApp en menos de 30 minutos</p>
+            </div>
+            
+            <form id="cotizacion-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo *</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Ej. Juan Pérez">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono">Número de WhatsApp *</label>
+                        <input type="tel" id="telefono" name="telefono" required placeholder="Ej. 238 123 4567">
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="mercancia">¿Qué deseas transportar? *</label>
+                        <textarea id="mercancia" name="mercancia" required placeholder="Describe detalladamente el tipo de mercancía que deseas enviar"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="origen">Ciudad de origen *</label>
+                        <input type="text" id="origen" name="origen" required placeholder="Ej. Tehuacán, Puebla">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="destino">Ciudad de destino *</label>
+                        <input type="text" id="destino" name="destino" required placeholder="Ej. Ciudad de México">
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label>Dimensiones del paquete *</label>
+                        <div class="dimensions-group">
+                            <div>
+                                <input type="number" id="ancho" name="ancho" required placeholder="Ancho (cm)">
+                            </div>
+                            <div>
+                                <input type="number" id="alto" name="alto" required placeholder="Alto (cm)">
+                            </div>
+                            <div>
+                                <input type="number" id="volumen" name="volumen" required placeholder="Volumen (kg)">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fecha">Fecha estimada de envío</label>
+                        <input type="date" id="fecha" name="fecha">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="agente">Agente de preferencia</label>
+                        <select id="agente" name="agente">
+                            <option value="">Seleccionar agente (opcional)</option>
+                            <option value="Carlos Rodríguez">Carlos Rodríguez</option>
+                            <option value="Laura Méndez">Laura Méndez</option>
+                            <option value="Miguel Ángel Torres">Miguel Ángel Torres</option>
+                            <option value="Ana García">Ana García</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group full-width" style="text-align: center; margin-top: 20px;">
+                        <button type="submit" class="submit-button">
+                            <i class="fab fa-whatsapp"></i> Solicitar cotización por WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+
+    <script>
+        document.getElementById('cotizacion-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obtener los valores del formulario
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const mercancia = document.getElementById('mercancia').value;
+            const origen = document.getElementById('origen').value;
+            const destino = document.getElementById('destino').value;
+            const ancho = document.getElementById('ancho').value;
+            const alto = document.getElementById('alto').value;
+            const volumen = document.getElementById('volumen').value;
+            const fecha = document.getElementById('fecha').value;
+            const agente = document.getElementById('agente').value;
+            
+            // Crear el mensaje para WhatsApp
+            let mensaje = `Hola, solicito una cotización para envío de mercancía:%0A%0A`;
+            mensaje += `*Nombre:* ${nombre}%0A`;
+            mensaje += `*Teléfono:* ${telefono}%0A`;
+            mensaje += `*Mercancía:* ${mercancia}%0A`;
+            mensaje += `*Origen:* ${origen}%0A`;
+            mensaje += `*Destino:* ${destino}%0A`;
+            mensaje += `*Dimensiones:* ${ancho}cm x ${alto}cm, ${volumen}kg%0A`;
+            
+            if (fecha) {
+                mensaje += `*Fecha estimada:* ${fecha}%0A`;
+            }
+            
+            if (agente) {
+                mensaje += `*Agente solicitado:* ${agente}%0A`;
+            }
+            
+            // Número de WhatsApp de la empresa (ejemplo)
+            const whatsappNumber = '522381620950';
+            
+            // Abrir WhatsApp con el mensaje
+            window.open(`https://wa.me/${whatsappNumber}?text=${mensaje}`, '_blank');
+        });
+    </script>
+</body>
+</html>
