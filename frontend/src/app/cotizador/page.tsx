@@ -5,17 +5,13 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Head from "next/head";
 import FooterComponent from '../../../components/footer/footer';
 import NavbarComponent from '../../../components/navbar/navbar';
-
-
 import styles from './ShippingQuotePage.module.css';
 
 interface Agent {
   name: string;
   role: string;
   image: string;
-  phone: string;
   whatsapp: string;
-  email: string;
 }
 
 const ShippingQuotePage: React.FC = () => {
@@ -28,42 +24,34 @@ const ShippingQuotePage: React.FC = () => {
     ancho: '',
     alto: '',
     volumen: '',
-    fecha: '',
     agente: ''
   });
 
   const agents: Agent[] = [
     {
-      name: 'Carlos Rodríguez',
-      role: 'Especialista en envíos nacionales',
+      name: 'Felipe Reyes',
+      role: 'Asesor OLT',
       image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=500&q=80',
-      phone: '+522381234567',
-      whatsapp: '522381234567',
-      email: 'carlos@olt.com.mx'
+      whatsapp: '522381652135',
     },
     {
       name: 'Laura Méndez',
       role: 'Coordinadora de logística',
       image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=500&q=80',
-      phone: '+522387654321',
       whatsapp: '522387654321',
-      email: 'laura@olt.com.mx'
     },
     {
-      name: 'Miguel Ángel Torres',
+      name: 'Raul Meceda',
       role: 'Especialista en carga pesada',
       image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=500&q=80',
-      phone: '+522389876543',
-      whatsapp: '522389876543',
-      email: 'miguel@olt.com.mx'
+      whatsapp: '522381524866',
     },
     {
       name: 'Ana García',
       role: 'Atención a clientes corporativos',
       image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=500&q=80',
-      phone: '+522383456789',
       whatsapp: '522383456789',
-      email: 'ana@olt.com.mx'
+
     }
   ];
 
@@ -75,44 +63,41 @@ const ShippingQuotePage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const { nombre, telefono, mercancia, origen, destino, ancho, alto, volumen, fecha, agente } = formData;
+    const { nombre, telefono, mercancia, origen, destino, ancho, alto, volumen, agente } = formData;
     
     let mensaje = `Hola, solicito una cotización para envío de mercancía:%0A%0A`;
     mensaje += `*Nombre:* ${nombre}%0A`;
-    mensaje += `*Teléfono:* ${telefono}%0A`;
     mensaje += `*Mercancía:* ${mercancia}%0A`;
     mensaje += `*Origen:* ${origen}%0A`;
     mensaje += `*Destino:* ${destino}%0A`;
     mensaje += `*Dimensiones:* ${ancho}cm x ${alto}cm, ${volumen}kg%0A`;
     
-    if (fecha) {
-      mensaje += `*Fecha estimada:* ${fecha}%0A`;
-    }
+    let whatsappNumber = '522381652135';
     
     if (agente) {
+      const selectedAgent = agents.find(agent => agent.name === agente);
+      if (selectedAgent) {
+        whatsappNumber = selectedAgent.whatsapp;
+      }
       mensaje += `*Agente solicitado:* ${agente}%0A`;
     }
     
-    const whatsappNumber = '522381620950';
     window.open(`https://wa.me/${whatsappNumber}?text=${mensaje}`, '_blank');
   };
 
   return (
     <div>
-         <NavbarComponent/>
+      <NavbarComponent/>
 
-
-    <Head>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    integrity="sha512-xX2Wjj6AA0IVpUJ6zGZUg19U7tOLqXb0nEomGpD6zvZq7gS8K5TLNwKRMuvFkBPLyU4VnnttLGe1qc9WZixI1A=="
-    crossOrigin="anonymous"
-    referrerPolicy="no-referrer"
-/>
-</Head>
-
-
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+          integrity="sha512-xX2Wjj6AA0IVpUJ6zGZUg19U7tOLqXb0nEomGpD6zvZq7gS8K5TLNwKRMuvFkBPLyU4VnnttLGe1qc9WZixI1A=="
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+        />
+      </Head>
 
       {/* Hero Section */}
       <section className={styles.hero}>
@@ -142,14 +127,13 @@ const ShippingQuotePage: React.FC = () => {
                 <h3>{agent.name}</h3>
                 <p>{agent.role}</p>
                 <div className={styles.agentContact}>
-                  <a href={`tel:${agent.phone}`} className={styles.phone}>
-                    <i className="fas fa-phone"></i>
-                  </a>
-                  <a href={`https://wa.me/${agent.whatsapp}`} className={styles.whatsapp}>
-                    <i className="fab fa-whatsapp"></i>
-                  </a>
-                  <a href={`mailto:${agent.email}`} className={styles.email}>
-                    <i className="fas fa-envelope"></i>
+                  <a 
+                    href={`https://wa.me/${agent.whatsapp}`} 
+                    className={styles.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-whatsapp"></i> 
                   </a>
                 </div>
               </div>
@@ -182,16 +166,18 @@ const ShippingQuotePage: React.FC = () => {
               </div>
               
               <div className={styles.formGroup}>
-                <label htmlFor="telefono">Número de WhatsApp *</label>
-                <input
-                  type="tel"
-                  id="telefono"
-                  name="telefono"
-                  value={formData.telefono}
+                <label htmlFor="agente">Agente de preferencia</label>
+                <select
+                  id="agente"
+                  name="agente"
+                  value={formData.agente}
                   onChange={handleInputChange}
-                  required
-                  placeholder="Ej. 238 123 4567"
-                />
+                >
+                  <option value="">Seleccionar agente (opcional)</option>
+                  {agents.map(agent => (
+                    <option key={agent.name} value={agent.name}>{agent.name}</option>
+                  ))}
+                </select>
               </div>
               
               <div className={`${styles.formGroup} ${styles.fullWidth}`}>
@@ -271,32 +257,6 @@ const ShippingQuotePage: React.FC = () => {
                 </div>
               </div>
               
-              <div className={styles.formGroup}>
-                <label htmlFor="fecha">Fecha estimada de envío</label>
-                <input
-                  type="date"
-                  id="fecha"
-                  name="fecha"
-                  value={formData.fecha}
-                  onChange={handleInputChange}
-                />
-              </div>
-              
-              <div className={styles.formGroup}>
-                <label htmlFor="agente">Agente de preferencia</label>
-                <select
-                  id="agente"
-                  name="agente"
-                  value={formData.agente}
-                  onChange={handleInputChange}
-                >
-                  <option value="">Seleccionar agente (opcional)</option>
-                  {agents.map(agent => (
-                    <option key={agent.name} value={agent.name}>{agent.name}</option>
-                  ))}
-                </select>
-              </div>
-              
               <div className={`${styles.formGroup} ${styles.fullWidth}`} style={{ textAlign: 'center', marginTop: '20px' }}>
                 <button type="submit" className={styles.submitButton}>
                   <i className="fab fa-whatsapp"></i> Solicitar cotización por WhatsApp
@@ -308,7 +268,7 @@ const ShippingQuotePage: React.FC = () => {
       </section>
 
       {/* Footer Section */}
-          <FooterComponent/>
+      <FooterComponent/>
     </div>
   );
 };
