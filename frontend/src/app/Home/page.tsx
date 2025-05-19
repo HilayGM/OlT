@@ -2,11 +2,26 @@
 'use client';
 import React from 'react';
 import "./principal.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import Head from "next/head";
+import FooterComponent from '../../../components/footer/footer';
+import NavbarComponent from '../../../components/navbar/navbar';
 
 
 function PrincipalPage() {
     return(
         <div>
+<Head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-xX2Wjj6AA0IVpUJ6zGZUg19U7tOLqXb0nEomGpD6zvZq7gS8K5TLNwKRMuvFkBPLyU4VnnttLGe1qc9WZixI1A=="
+    crossOrigin="anonymous"
+    referrerPolicy="no-referrer"
+/>
+</Head>
+
+            <NavbarComponent/>
             
     <section className="hero">
         <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=400&q=80" alt="Camión de reparto" className="hero-image" />
@@ -157,7 +172,7 @@ function PrincipalPage() {
             </div>
         </div>
     </section>
-    
+        <FooterComponent/>
         </div>
     )
 }

@@ -28,14 +28,14 @@ export default function NavbarComponent() {
       <header className="navbar">
         <div className="navbar-container">
           <div className="logo" onClick={toggleSidebar}>
-            <img src="/logo.png" alt="Logo" />
+           <img src="/logo.png" alt="Logo" />
           </div>
 
           {!isMobile && (
             <nav className="nav-links">
               <ul>
                 <li><Link href="/">Inicio</Link></li>
-                <li><Link href="/nosotros">Conócenos</Link></li>
+                <li><Link href="/conocenos">Conócenos</Link></li>
                 <li><Link href="/servicios">Servicios</Link></li>
                 <li><Link href="/cotizador">Cotizador</Link></li>
               </ul>
@@ -49,7 +49,7 @@ export default function NavbarComponent() {
           <aside className="sidebar">
             <ul>
               <li><Link href="/" onClick={toggleSidebar}>Inicio</Link></li>
-              <li><Link href="/nosotros" onClick={toggleSidebar}>Conócenos</Link></li>
+              <li><Link href="/conocenos" onClick={toggleSidebar}>Conócenos</Link></li>
               <li><Link href="/servicios" onClick={toggleSidebar}>Servicios</Link></li>
               <li><Link href="/cotizador" onClick={toggleSidebar}>Cotizador</Link></li>
             </ul>

@@ -1,0 +1,266 @@
+/* ServiciosPage.module.css */
+
+.hero {
+  background: #f7f9fc;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.hero h1 {
+  color: #e60012;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+.servicesOverview {
+  padding: 60px 0;
+  background: #f7f9fc;
+}
+
+.servicesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.serviceCard {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.serviceIcon {
+  background-color: #e60012;
+  color: #fff;
+  font-size: 32px;
+  padding: 30px 0;
+  text-align: center;
+}
+
+.serviceContent {
+  text-align: center;
+  padding: 24px;
+}
+
+.serviceContent h3 {
+  margin: 0 0 12px 0;
+  color: #e60012;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.serviceContent p {
+  margin-bottom: 16px;
+  color: #666;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+
+
+
+
+.ctaSection {
+  background: #e60012;
+  color: #fff;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.ctaButtons {
+  margin-top: 24px;
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 4px;
+  margin: 0 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.ctaButton.primary {
+  background: #fff;
+  color: #e60012;
+  border: 2px solid #fff;
+}
+
+.ctaButton.primary:hover {
+  background: transparent;
+  color: #fff;
+}
+
+.ctaButton.secondary {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.ctaButton.secondary:hover {
+  background: #fff;
+  color: #e60012;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  display: flex;
+  opacity: 1;
+}
+
+.modalContent {
+  background: #fff;
+  border-radius: 8px;
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.modal.show .modalContent {
+  transform: scale(1);
+}
+
+.closeModal {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s ease;
+}
+
+.closeModal:hover {
+  color: #e60012;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.modalIcon {
+  font-size: 40px;
+  color: #e60012;
+  background: #fff4f4;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.modalTitle {
+  margin: 0;
+  color: #e60012;
+  font-size: 1.8rem;
+}
+
+.modalBody {
+  color: #444;
+  line-height: 1.6;
+}
+
+.modalBody p {
+  margin-bottom: 20px;
+}
+
+.modalBody ul {
+  margin: 16px 0 0 0;
+  padding-left: 20px;
+}
+
+.modalBody li {
+  margin-bottom: 8px;
+}
+
+.modalFooter {
+  margin-top: 30px;
+  text-align: right;
+}
+
+.modalButton {
+  background: #e60012;
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.modalButton:hover {
+  background: #b80000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .servicesGrid {
+    gap: 16px;
+  }
+  
+  .serviceCard {
+    width: 100%;
+    max-width: 320px;
+  }
+  
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .ctaButton {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .modalContent {
+    padding: 30px 20px;
+    margin: 0 16px;
+  }
+  
+  .modalHeader {
+    flex-direction: column;
+    text-align: center;
+  }
+}

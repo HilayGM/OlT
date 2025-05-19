@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Nuestros Servicios</h1>
+            <p>Ofrecemos soluciones logísticas integrales adaptadas a las necesidades específicas de cada cliente.</p>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="services-overview">
+        <div class="container">
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Paquetería</h3>
+                        <p>Servicio de envío de paquetes de cualquier tamaño a nivel nacional con seguimiento en tiempo real.</p>
+                        <a class="service-link" data-service="paqueteria">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Carga Consolidada</h3>
+                        <p>Optimiza tus costos de envío agrupando mercancías con destinos similares en un solo transporte.</p>
+                        <a class="service-link" data-service="carga-consolidada">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Recolección a Domicilio</h3>
+                        <p>Recogemos tus envíos directamente en tu domicilio u oficina para mayor comodidad.</p>
+                        <a class="service-link" data-service="recoleccion">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Embalaje</h3>
+                        <p>Servicio profesional de embalaje para proteger tus mercancías durante el transporte.</p>
+                        <a class="service-link" data-service="embalaje">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-truck-moving"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Fletes y Mudanzas</h3>
+                        <p>Transporte de mercancías de gran volumen y servicios de mudanza a nivel nacional.</p>
+                        <a class="service-link" data-service="fletes">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Acuses de Recibo</h3>
+                        <p>Confirmación de entrega con firma del destinatario para mayor seguridad y control.</p>
+                        <a class="service-link" data-service="acuses">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Ocurre</h3>
+                        <p>Servicio donde el destinatario recoge su paquete en nuestras oficinas cuando le resulte conveniente.</p>
+                        <a class="service-link" data-service="ocurre">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pallet"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Pallet (Tarima)</h3>
+                        <p>Transporte de mercancías paletizadas para envíos de gran volumen o peso.</p>
+                        <a class="service-link" data-service="pallet">Más información</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Seguro de Mercancías</h3>
+                        <p>Protección adicional para tus envíos contra pérdidas, daños o robos durante el transporte.</p>
+                        <a class="service-link" data-service="seguro">Más información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Listo para enviar?</h2>
+            <p>Contáctanos hoy mismo para obtener una cotización personalizada o para resolver cualquier duda sobre nuestros servicios.</p>
+            <div class="cta-buttons">
+                <a href="cotizar.html" class="cta-button primary">Solicitar cotización</a>
+                <a href="tel:+522383830123" class="cta-button secondary">Llamar ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i id="modalIcon" class="fas"></i>
+                </div>
+                <h2 class="modal-title" id="modalTitle"></h2>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+            <div class="modal-footer">
+                <a href="cotizar.html" class="modal-button">Solicitar cotización</a>
+            </div>
+        </div>
+    </div>
+
+    
+    <script>
+        // Service details data
+        const serviceDetails = {
+            'paqueteria': {
+                title: 'Paquetería',
+                icon: 'fa-box',
+                description: 'Nuestro servicio de paquetería ofrece soluciones para el envío de paquetes de cualquier tamaño a nivel nacional. Contamos con una amplia red de distribución que nos permite llegar a cualquier punto del país con tiempos de entrega óptimos.',
+                features: [
+                    'Envíos de 1 kg hasta 70 kg',
+                    'Seguimiento en tiempo real',
+                    'Notificaciones de entrega',
+                    'Tarifas competitivas'
+                ]
+            },
+            'carga-consolidada': {
+                title: 'Carga Consolidada',
+                icon: 'fa-truck',
+                description: 'La carga consolidada es una solución ideal para optimizar costos de envío. Consiste en agrupar mercancías de diferentes clientes con destinos similares en un solo transporte, lo que permite reducir costos y tiempos de entrega.',
+                features: [
+                    'Reducción de costos de transporte',
+                    'Menor impacto ambiental',
+                    'Ideal para envíos frecuentes',
+                    'Disponible para todo tipo de mercancías'
+                ]
+            },
+            'recoleccion': {
+                title: 'Recolección a Domicilio',
+                icon: 'fa-home',
+                description: 'Ofrecemos el servicio de recolección a domicilio para mayor comodidad de nuestros clientes. Un operador se presentará en la dirección indicada para recoger los paquetes o mercancías que desees enviar.',
+                features: [
+                    'Programación de recolección',
+                    'Servicio disponible en todo el país',
+                    'Ahorro de tiempo y desplazamientos',
+                    'Confirmación de recolección'
+                ]
+            },
+            'embalaje': {
+                title: 'Embalaje',
+                icon: 'fa-box-open',
+                description: 'Contamos con un servicio profesional de embalaje para proteger tus mercancías durante el transporte. Utilizamos materiales de alta calidad y técnicas adecuadas según el tipo de producto a transportar.',
+                features: [
+                    'Embalaje personalizado',
+                    'Materiales de protección',
+                    'Etiquetado profesional',
+                    'Asesoría en embalaje especial'
+                ]
+            },
+            'fletes': {
+                title: 'Fletes y Mudanzas',
+                icon: 'fa-truck-moving',
+                description: 'Nuestro servicio de fletes y mudanzas está diseñado para el transporte de mercancías de gran volumen o para traslados completos de oficinas y hogares. Contamos con vehículos de diferentes capacidades para adaptarnos a tus necesidades.',
+                features: [
+                    'Fletes locales y nacionales',
+                    'Mudanzas residenciales y comerciales',
+                    'Personal capacitado',
+                    'Servicio de carga y descarga'
+                ]
+            },
+            'acuses': {
+                title: 'Acuses de Recibo',
+                icon: 'fa-clipboard-check',
+                description: 'El servicio de acuses de recibo proporciona una confirmación de entrega con la firma del destinatario. Este servicio es ideal para envíos de documentos importantes o mercancías de valor que requieren un control estricto.',
+                features: [
+                    'Confirmación de entrega',
+                    'Firma del destinatario',
+                    'Acceso a comprobantes digitales',
+                    'Mayor seguridad en tus envíos'
+                ]
+            },
+            'ocurre': {
+                title: 'Ocurre',
+                icon: 'fa-building',
+                description: 'El servicio "Ocurre" permite que el destinatario recoja su paquete en nuestras oficinas cuando le resulte conveniente. Es una excelente opción cuando no hay nadie disponible para recibir el envío en el domicilio o se requiere mayor flexibilidad.',
+                features: [
+                    'Flexibilidad de horarios',
+                    'Notificación de disponibilidad',
+                    'Identificación requerida para recoger',
+                    'Almacenamiento seguro'
+                ]
+            },
+            'pallet': {
+                title: 'Pallet (Tarima)',
+                icon: 'fa-pallet',
+                description: 'El servicio de transporte de pallets o tarimas está diseñado para el envío de mercancías paletizadas. Es ideal para envíos de gran volumen o peso que requieren un manejo especial con montacargas o equipos de carga.',
+                features: [
+                    'Transporte de mercancía paletizada',
+                    'Manejo con equipo especializado',
+                    'Optimización de espacio',
+                    'Ideal para envíos industriales'
+                ]
+            },
+            'seguro': {
+                title: 'Seguro de Mercancías',
+                icon: 'fa-shield-alt',
+                description: 'Ofrecemos seguros para tus envíos que brindan protección adicional contra pérdidas, daños o robos durante el transporte. Es una opción recomendada para mercancías de valor o envíos críticos para tu negocio.',
+                features: [
+                    'Cobertura contra daños',
+                    'Protección contra robos',
+                    'Indemnización por pérdidas',
+                    'Diferentes niveles de cobertura'
+                ]
+            }
+        };
+
+        // Get modal elements
+        const modal = document.getElementById('serviceModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalBody = document.getElementById('modalBody');
+        const closeModal = document.querySelector('.close-modal');
+
+        // Add event listeners to all service links
+        document.querySelectorAll('.service-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const serviceId = this.getAttribute('data-service');
+                openServiceModal(serviceId);
+            });
+        });
+
+        // Close modal when clicking on close button
+        closeModal.addEventListener('click', function() {
+            closeServiceModal();
+        });
+
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeServiceModal();
+            }
+        });
+
+        // Function to open modal with service details
+        function openServiceModal(serviceId) {
+            const service = serviceDetails[serviceId];
+            
+            if (service) {
+                // Set modal content
+                modalTitle.textContent = service.title;
+                modalIcon.className = `fas ${service.icon}`;
+                
+                // Build modal body content
+                let bodyContent = `<p>${service.description}</p>`;
+                
+                if (service.features && service.features.length > 0) {
+                    bodyContent += '<ul>';
+                    service.features.forEach(feature => {
+                        bodyContent += `<li>${feature}</li>`;
+                    });
+                    bodyContent += '</ul>';
+                }
+                
+                modalBody.innerHTML = bodyContent;
+                
+                // Show modal with animation
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+        }
+
+        // Function to close modal
+        function closeServiceModal() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modalBody.innerHTML = '';
+            }, 300);
+            document.body.style.overflow = ''; // Re-enable scrolling
+        }
+    </script>
+</body>
+</html>

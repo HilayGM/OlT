@@ -46,6 +46,25 @@
   }
 }
 
+
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #ffffff;
+        }
+        
+        /* Header */
+        header {
+            background-color: #e30613;
+            color: white;
+            padding: 15px 0;
+        }
+
 @media (max-width: 600px) {
   .hero {
     height: auto;
