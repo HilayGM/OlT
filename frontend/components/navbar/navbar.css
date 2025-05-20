@@ -1,5 +1,6 @@
 :root {
   --main-color: #e30613;
+  --main-color-li: #212529;
   --text-color: white;
 }
 
@@ -85,7 +86,7 @@
     left: 0;
     width: 220px;
     height: 100%;
-    background-color: var(--main-color);
+    background-color: var(--main-color-li);
     padding: 80px 20px;
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
     z-index: 1001;

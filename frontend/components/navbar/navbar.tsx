@@ -52,6 +52,7 @@ export default function NavbarComponent() {
               <li><Link href="/" onClick={toggleSidebar}>Inicio</Link></li>
               <li><Link href="/conocenos" onClick={toggleSidebar}>Conócenos</Link></li>
               <li><Link href="/servicios" onClick={toggleSidebar}>Servicios</Link></li>
+              <li><Link href="/act" onClick={toggleSidebar}>actualizaciones</Link></li>
               <li><Link href="/cotizador" onClick={toggleSidebar}>Cotizador</Link></li>
             </ul>
           </aside>

@@ -25,7 +25,7 @@ function FooterComponent() {
           <div className="footer-top">
             <div className="footer-column">
               <div className="footer-logo">
-                <img src="/logo.jpg" alt="Logo" />
+                <img src="/logo.png" alt="Logo" />
               </div>
               <p>
                 Operador Logístico Tehuacán es una empresa dedicada al
