@@ -1,5 +1,5 @@
 import express from 'express';
-import {getAllBlogs, getBlogById, createBlog, updateBlog, deleteBlog} from '../controllers/blogController.js';
+import {getAllBlogs, getBlogById, createBlog, updateBlog, deleteBlog} from '../controllers/BlogController.js';
 const router = express.Router();
 // Definimos las rutas para el CRUD de usuarios
 
