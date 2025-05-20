@@ -23,7 +23,7 @@ function ConocenosPage() {
         
     <section className="hero1">
         <div className="container1">
-            <h1>Conócenos</h1>
+            <h1>Cobertura</h1>
             <p>Somos un operador logístico con más de 10 años de experiencia brindando soluciones de transporte y distribución en todo México.</p>
         </div>
     </section>
