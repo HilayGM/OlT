@@ -4,6 +4,7 @@ import Head from "next/head";
 import React from 'react';
 import "./footer.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Link from 'next/link';
 
 
 function FooterComponent() {
@@ -24,7 +25,7 @@ function FooterComponent() {
           <div className="footer-top">
             <div className="footer-column">
               <div className="footer-logo">
-                <img src="/logo.png" alt="Logo" />
+                <img src="/logo.jpg" alt="Logo" />
               </div>
               <p>
                 Operador Logístico Tehuacán es una empresa dedicada al
@@ -32,9 +33,8 @@ function FooterComponent() {
                 más de 10 años de experiencia en el sector.
               </p>
               <div className="social-links">
-                <a href="#"><i className="fab fa-facebook-f"></i></a>
-                <a href="#"><i className="fab fa-twitter"></i></a>
-                <a href="#"><i className="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1ATePcDafC/"><i className="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/oltenvios?igsh=YTdvdmF4OXJ2eWx5"><i className="fab fa-instagram"></i></a>
                 <a href="#"><i className="fab fa-whatsapp"></i></a>
               </div>
             </div>
@@ -42,25 +42,25 @@ function FooterComponent() {
             <div className="footer-column">
               <h3>Enlaces Rápidos</h3>
               <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="nosotros.html">Conócenos</a></li>
-                <li><a href="servicios.html">Servicios</a></li>
-                <li><a href="actualizaciones.html">Actualizaciones</a></li>
-                <li><a href="cotizar.html">Cotizador</a></li>
-                <li><a href="#">Términos y Condiciones</a></li>
+                <li><Link href="/Home">Inicio</Link></li>
+                <li><Link href="/conocenos">Conócenos</Link></li>
+                <li><Link href="/servicios">Servicios</Link></li>
+                <li><Link href="/actualizaciones">Actualizaciones</Link></li>
+                <li><Link href="/cotizador">Cotizador</Link></li>
+                <li><Link href="/terminos">Términos y Condiciones</Link></li>
               </ul>
             </div>
 
             <div className="footer-column">
               <h3>Nuestros Servicios</h3>
               <ul>
-                <li><a href="#">Paquetería</a></li>
-                <li><a href="#">Carga Consolidada</a></li>
-                <li><a href="#">Recolección a Domicilio</a></li>
-                <li><a href="#">Embalaje</a></li>
-                <li><a href="#">Fletes y Mudanzas</a></li>
-                <li><a href="#">Acuses de Recibo</a></li>
-                <li><a href="#">Seguro de Mercancías</a></li>
+                <li><Link href="/servicios?servicio=paqueteria">Paquetería</Link></li>
+                <li><Link href="/servicios?servicio=carga-consolidada">Carga Consolidada</Link></li>
+                <li><Link href="/servicios?servicio=recoleccion">Recolección a Domicilio</Link></li>
+                <li><Link href="/servicios?servicio=embalaje">Embalaje</Link></li>
+                <li><Link href="/servicios?servicio=fletes">Fletes y Mudanzas</Link></li>
+                <li><Link href="/servicios?servicio=acuses">Acuses de Recibo</Link></li>
+                <li><Link href="/servicios?servicio=seguro">Seguro de Mercancías</Link></li>
               </ul>
             </div>
 
@@ -77,7 +77,7 @@ function FooterComponent() {
 
           <div className="footer-bottom">
             <p>
-              © 2025 <a href="#">Operador Logístico Tehuacán</a>. Todos los
+              © 2025 <Link href="/">Operador Logístico Tehuacán</Link>. Todos los
               derechos reservados.
             </p>
           </div>

@@ -155,7 +155,7 @@ function ConocenosPage() {
         <div className="container1">
             <h2>¿Necesitas una cotización?</h2>
             <p>Si deseas saber el tiempo de entrega de un origen y un punto de entrega distinto, ve a contacto y elige a un asesor logístico para recibir toda la información que necesitas.</p>
-            <a href="cotizar.html" className="cta-button">Cotiza ahora</a>
+            <a href="#" className="cta-button">Cotiza ahora</a>
         </div>
     </section>
         
