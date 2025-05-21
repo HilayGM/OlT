@@ -1,0 +1,100 @@
+.main {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+              url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=600&q=80');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.heroContent h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.content {
+  padding: 60px 0;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.section h2 {
+  color: #e60012;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e60012;
+  padding-bottom: 10px;
+}
+
+.subsection {
+  margin-bottom: 30px;
+}
+
+.subsection h3 {
+  color: #333;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.subsection p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list li {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.list li:before {
+  content: "•";
+  color: #e60012;
+  position: absolute;
+  left: 0;
+}
+
+.footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .heroContent h1 {
+    font-size: 2rem;
+  }
+
+  .section h2 {
+    font-size: 1.5rem;
+  }
+
+  .subsection h3 {
+    font-size: 1.2rem;
+  }
+}

@@ -23,7 +23,7 @@ function ConocenosPage() {
         
     <section className="hero1">
         <div className="container1">
-            <h1>Conócenos</h1>
+            <h1>Cobertura</h1>
             <p>Somos un operador logístico con más de 10 años de experiencia brindando soluciones de transporte y distribución en todo México.</p>
         </div>
     </section>
@@ -155,7 +155,7 @@ function ConocenosPage() {
         <div className="container1">
             <h2>¿Necesitas una cotización?</h2>
             <p>Si deseas saber el tiempo de entrega de un origen y un punto de entrega distinto, ve a contacto y elige a un asesor logístico para recibir toda la información que necesitas.</p>
-            <a href="cotizar.html" className="cta-button">Cotiza ahora</a>
+            <a href="#" className="cta-button">Cotiza ahora</a>
         </div>
     </section>
         
