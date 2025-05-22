@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Head from "next/head";
-import FooterComponent from '../../../components/footer/footer';
-import NavbarComponent from '../../../components/navbar/navbar';
-import styles from './ShippingQuotePage.module.css';
+import FooterComponent from "../../../components/footer/footer";
+import NavbarComponent from "../../../components/navbar/navbar";
+import styles from "./ShippingQuotePage.module.css";
 
 interface Agent {
   name: string;
@@ -18,36 +18,36 @@ interface Agent {
 
 const agents: Agent[] = [
   {
-    name: 'Juan Pérez',
-    role: 'Agente de ventas',
-    imageUrl: './public/lic.webp',
-    phone: '+522382186185',
-    email: 'Martinlibreros0@gmail.com',
-    whatsapp: '521234567890',
+    name: "Felipe Reyes",
+    role: "Asesor logístico",
+    imageUrl: "./public/lic.webp",
+    phone: "+522381652135",
+    email: "freyes@oltenvios.com",
+    whatsapp: "2381652135",
   },
   {
-    name: 'María López',
-    role: 'Atención al cliente',
-    imageUrl: '/images/maria.jpg',
-    phone: '+521987654321',
-    email: 'maria@logistica.com',
-    whatsapp: '521987654321',
+    name: "Raúl Maceda",
+    role: "Atención al cliente",
+    imageUrl: "/images/maria.jpg",
+    phone: "+522381524866",
+    email: "clientes@oltenvios.com",
+    whatsapp: "522381524866",
   },
   {
-    name: 'Carlos Ramírez',
-    role: 'Soporte logístico',
-    imageUrl: '/images/carlos.jpg',
-    phone: '+5215551234567',
-    email: 'carlos@logistica.com',
-    whatsapp: '5215551234567',
+    name: "Ivan Reyes",
+    role: "Atención a Clientes",
+    imageUrl: "/images/carlos.jpg",
+    phone: "+522382219925",
+    email: "asesor04@oltenvios.com",
+    whatsapp: "522382219925",
   },
   {
-    name: 'Ana Torres',
-    role: 'Ejecutiva de cuentas',
-    imageUrl: '/images/ana.jpg',
-    phone: '+5215587654321',
-    email: 'ana@logistica.com',
-    whatsapp: '5215587654321',
+    name: "Beatriz Dominguez",
+    role: " Administración",
+    imageUrl: "/images/ana.jpg",
+    phone: "+52238 170 0889",
+    email: "ana@logistica.com",
+    whatsapp: "52238 170 0889",
   },
 ];
 
@@ -65,28 +65,40 @@ interface FormData {
 
 const ShippingQuotePage: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    nombre: '',
-    telefono: '',
-    mercancia: '',
-    origen: '',
-    destino: '',
-    ancho: '',
-    alto: '',
-    volumen: '',
-    agente: '',
+    nombre: "",
+    telefono: "",
+    mercancia: "",
+    origen: "",
+    destino: "",
+    ancho: "",
+    alto: "",
+    volumen: "",
+    agente: "",
   });
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const { nombre, telefono, mercancia, origen, destino, ancho, alto, volumen, agente } = formData;
+    const {
+      nombre,
+      telefono,
+      mercancia,
+      origen,
+      destino,
+      ancho,
+      alto,
+      volumen,
+      agente,
+    } = formData;
 
     let mensaje = `Hola, solicito una cotización para envío de mercancía:%0A%0A`;
     mensaje += `*Nombre:* ${nombre}%0A`;
@@ -95,17 +107,17 @@ const ShippingQuotePage: React.FC = () => {
     mensaje += `*Destino:* ${destino}%0A`;
     mensaje += `*Dimensiones:* ${ancho}cm x ${alto}cm, ${volumen}kg%0A`;
 
-    let whatsappNumber = '522381652135';
+    let whatsappNumber = "522381652135";
 
     if (agente) {
-      const selectedAgent = agents.find(agent => agent.name === agente);
+      const selectedAgent = agents.find((agent) => agent.name === agente);
       if (selectedAgent) {
         whatsappNumber = selectedAgent.whatsapp;
       }
       mensaje += `*Agente solicitado:* ${agente}%0A`;
     }
 
-    window.open(`https://wa.me/${whatsappNumber}?text=${mensaje}`, '_blank');
+    window.open(`https://wa.me/${whatsappNumber}?text=${mensaje}`, "_blank");
   };
 
   return (
@@ -126,7 +138,11 @@ const ShippingQuotePage: React.FC = () => {
       <section className={styles.hero}>
         <div className={styles.heroContainer}>
           <h1>Cotiza tu envío en minutos</h1>
-          <p>Obtén una cotización rápida y personalizada para tus envíos de mercancía. Nuestro equipo de expertos te atenderá directamente por WhatsApp.</p>
+          <p>
+            Obtén una cotización rápida y personalizada para tus envíos de
+            mercancía. Nuestro equipo de expertos te atenderá directamente por
+            WhatsApp.
+          </p>
           <div className={styles.whatsappBadge}>
             <i className="fab fa-whatsapp"></i> Cotización vía WhatsApp
           </div>
@@ -136,7 +152,10 @@ const ShippingQuotePage: React.FC = () => {
       <section className={styles.agents}>
         <div className={styles.sectionTitle}>
           <h2>Nuestros Agentes</h2>
-          <p>Contacta directamente con nuestros asesores para ayudarte en tu proceso logístico.</p>
+          <p>
+            Contacta directamente con nuestros asesores para ayudarte en tu
+            proceso logístico.
+          </p>
         </div>
 
         <div className={styles.agentsGrid}>
@@ -149,18 +168,31 @@ const ShippingQuotePage: React.FC = () => {
                 <h3>{agent.name}</h3>
                 <p>{agent.role}</p>
                 <div className={styles.agentContact}>
-                  <a href={`tel:${agent.phone}`} className={styles.phone} title="Llamar">
+                  <a
+                    href={`tel:${agent.phone}`}
+                    className={styles.phone}
+                    title="Llamar"
+                  >
                     <i className="fas fa-phone"></i>
                   </a>
                   <a
-                    href={`https://mail.google.com/mail/?view=cm&to=${agent.email}`}
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const isMobile = /iPhone|iPad|iPod|Android/i.test(
+                        navigator.userAgent
+                      );
+                      const mailtoLink = `mailto:${agent.email}`;
+                      const gmailLink = `https://mail.google.com/mail/?view=cm&to=${agent.email}`;
+
+                      window.open(isMobile ? mailtoLink : gmailLink, "_blank");
+                    }}
                     className={styles.email}
                     title="Correo"
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     <i className="fas fa-envelope"></i>
                   </a>
+
                   <a
                     href={`https://wa.me/${agent.whatsapp}`}
                     className={styles.whatsapp}
@@ -182,7 +214,10 @@ const ShippingQuotePage: React.FC = () => {
         <div className={styles.formContainer}>
           <div className={styles.formTitle}>
             <h2>Solicita tu cotización</h2>
-            <p>Completa el formulario y te enviaremos las mejores propuestas por WhatsApp en menos de 30 minutos</p>
+            <p>
+              Completa el formulario y te enviaremos las mejores propuestas por
+              WhatsApp en menos de 30 minutos
+            </p>
           </div>
 
           <form id="cotizacion-form" onSubmit={handleSubmit}>
@@ -209,8 +244,10 @@ const ShippingQuotePage: React.FC = () => {
                   onChange={handleInputChange}
                 >
                   <option value="">Seleccionar agente (opcional)</option>
-                  {agents.map(agent => (
-                    <option key={agent.name} value={agent.name}>{agent.name}</option>
+                  {agents.map((agent) => (
+                    <option key={agent.name} value={agent.name}>
+                      {agent.name}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -292,9 +329,13 @@ const ShippingQuotePage: React.FC = () => {
                 </div>
               </div>
 
-              <div className={`${styles.formGroup} ${styles.fullWidth}`} style={{ textAlign: 'center', marginTop: '20px' }}>
+              <div
+                className={`${styles.formGroup} ${styles.fullWidth}`}
+                style={{ textAlign: "center", marginTop: "20px" }}
+              >
                 <button type="submit" className={styles.submitButton}>
-                  <i className="fab fa-whatsapp"></i> Solicitar cotización por WhatsApp
+                  <i className="fab fa-whatsapp"></i> Solicitar cotización por
+                  WhatsApp
                 </button>
               </div>
             </div>

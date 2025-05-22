@@ -210,6 +210,8 @@
             color: var(--white);
             border-radius: 50%;
             transition: all 0.3s ease;
+                text-decoration: none;
+  border: none;
         }
         
         .social-links a:hover {
