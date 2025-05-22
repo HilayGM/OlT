@@ -35,7 +35,7 @@ export default function NavbarComponent() {
             <nav className="nav-links">
               <ul>
                 <li><Link href="/">Inicio</Link></li>
-                <li><Link href="/conocenos">cobertura</Link></li>
+                <li><Link href="/cobertura">cobertura</Link></li>
                 <li><Link href="/servicios">Servicios</Link></li>
                 <li><Link href="/act">actualizaciones</Link></li>
                 <li><Link href="/cotizador">Cotizador</Link></li>

@@ -10,12 +10,61 @@ import styles from './ShippingQuotePage.module.css';
 interface Agent {
   name: string;
   role: string;
-  image: string;
+  imageUrl: string;
+  phone: string;
+  email: string;
   whatsapp: string;
 }
 
+const agents: Agent[] = [
+  {
+    name: 'Juan Pérez',
+    role: 'Agente de ventas',
+    imageUrl: '/images/juan.jpg',
+    phone: '+522382186185',
+    email: 'Martinlibreros0@gmail.com',
+    whatsapp: '521234567890',
+  },
+  {
+    name: 'María López',
+    role: 'Atención al cliente',
+    imageUrl: '/images/maria.jpg',
+    phone: '+521987654321',
+    email: 'maria@logistica.com',
+    whatsapp: '521987654321',
+  },
+  {
+    name: 'Carlos Ramírez',
+    role: 'Soporte logístico',
+    imageUrl: '/images/carlos.jpg',
+    phone: '+5215551234567',
+    email: 'carlos@logistica.com',
+    whatsapp: '5215551234567',
+  },
+  {
+    name: 'Ana Torres',
+    role: 'Ejecutiva de cuentas',
+    imageUrl: '/images/ana.jpg',
+    phone: '+5215587654321',
+    email: 'ana@logistica.com',
+    whatsapp: '5215587654321',
+  },
+];
+
+interface FormData {
+  nombre: string;
+  telefono: string;
+  mercancia: string;
+  origen: string;
+  destino: string;
+  ancho: string;
+  alto: string;
+  volumen: string;
+  agente: string;
+}
+
 const ShippingQuotePage: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     nombre: '',
     telefono: '',
     mercancia: '',
@@ -24,56 +73,30 @@ const ShippingQuotePage: React.FC = () => {
     ancho: '',
     alto: '',
     volumen: '',
-    agente: ''
+    agente: '',
   });
 
-  const agents: Agent[] = [
-    {
-      name: 'Felipe Reyes',
-      role: 'Asesor OLT',
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=500&q=80',
-      whatsapp: '522381652135',
-    },
-    {
-      name: 'Laura Méndez',
-      role: 'Coordinadora de logística',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=500&q=80',
-      whatsapp: '522387654321',
-    },
-    {
-      name: 'Raul Meceda',
-      role: 'Especialista en carga pesada',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=500&q=80',
-      whatsapp: '522381524866',
-    },
-    {
-      name: 'Ana García',
-      role: 'Atención a clientes corporativos',
-      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=500&q=80',
-      whatsapp: '522383456789',
-
-    }
-  ];
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const { nombre, telefono, mercancia, origen, destino, ancho, alto, volumen, agente } = formData;
-    
+
     let mensaje = `Hola, solicito una cotización para envío de mercancía:%0A%0A`;
     mensaje += `*Nombre:* ${nombre}%0A`;
     mensaje += `*Mercancía:* ${mercancia}%0A`;
     mensaje += `*Origen:* ${origen}%0A`;
     mensaje += `*Destino:* ${destino}%0A`;
     mensaje += `*Dimensiones:* ${ancho}cm x ${alto}cm, ${volumen}kg%0A`;
-    
+
     let whatsappNumber = '522381652135';
-    
+
     if (agente) {
       const selectedAgent = agents.find(agent => agent.name === agente);
       if (selectedAgent) {
@@ -81,13 +104,13 @@ const ShippingQuotePage: React.FC = () => {
       }
       mensaje += `*Agente solicitado:* ${agente}%0A`;
     }
-    
+
     window.open(`https://wa.me/${whatsappNumber}?text=${mensaje}`, '_blank');
   };
 
   return (
     <div>
-      <NavbarComponent/>
+      <NavbarComponent />
 
       <Head>
         <link
@@ -110,30 +133,42 @@ const ShippingQuotePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Agents Section */}
       <section className={styles.agents}>
         <div className={styles.sectionTitle}>
-          <h2>Nuestro equipo está listo para ayudarte</h2>
-          <p>Estos son los agentes que te atenderán personalmente para resolver todas tus dudas y brindarte la mejor cotización.</p>
+          <h2>Nuestros Agentes</h2>
+          <p>Contacta directamente con nuestros asesores para ayudarte en tu proceso logístico.</p>
         </div>
-        
+
         <div className={styles.agentsGrid}>
-          {agents.map((agent) => (
-            <div key={agent.name} className={styles.agentCard}>
+          {agents.map((agent, index) => (
+            <div key={index} className={styles.agentCard}>
               <div className={styles.agentImage}>
-                <img src={agent.image} alt={agent.name} />
+                <img src={agent.imageUrl} alt={agent.name} />
               </div>
               <div className={styles.agentInfo}>
                 <h3>{agent.name}</h3>
                 <p>{agent.role}</p>
                 <div className={styles.agentContact}>
-                  <a 
-                    href={`https://wa.me/${agent.whatsapp}`} 
-                    className={styles.whatsapp}
+                  <a href={`tel:${agent.phone}`} className={styles.phone} title="Llamar">
+                    <i className="fas fa-phone"></i>
+                  </a>
+                  <a
+                    href={`https://mail.google.com/mail/?view=cm&to=${agent.email}`}
+                    className={styles.email}
+                    title="Correo"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fab fa-whatsapp"></i> 
+                    <i className="fas fa-envelope"></i>
+                  </a>
+                  <a
+                    href={`https://wa.me/${agent.whatsapp}`}
+                    className={styles.whatsapp}
+                    title="WhatsApp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-whatsapp"></i>
                   </a>
                 </div>
               </div>
@@ -147,9 +182,9 @@ const ShippingQuotePage: React.FC = () => {
         <div className={styles.formContainer}>
           <div className={styles.formTitle}>
             <h2>Solicita tu cotización</h2>
-            <p>Completa el formulario y te enviaremos tu cotización por WhatsApp en menos de 30 minutos</p>
+            <p>Completa el formulario y te enviaremos las mejores propuestas por WhatsApp en menos de 30 minutos</p>
           </div>
-          
+
           <form id="cotizacion-form" onSubmit={handleSubmit}>
             <div className={styles.formGrid}>
               <div className={styles.formGroup}>
@@ -161,10 +196,10 @@ const ShippingQuotePage: React.FC = () => {
                   value={formData.nombre}
                   onChange={handleInputChange}
                   required
-                  placeholder="Ej. Juan Pérez"
+                  placeholder="Nombre completo"
                 />
               </div>
-              
+
               <div className={styles.formGroup}>
                 <label htmlFor="agente">Agente de preferencia</label>
                 <select
@@ -179,7 +214,7 @@ const ShippingQuotePage: React.FC = () => {
                   ))}
                 </select>
               </div>
-              
+
               <div className={`${styles.formGroup} ${styles.fullWidth}`}>
                 <label htmlFor="mercancia">¿Qué deseas transportar? *</label>
                 <textarea
@@ -191,7 +226,7 @@ const ShippingQuotePage: React.FC = () => {
                   placeholder="Describe detalladamente el tipo de mercancía que deseas enviar"
                 />
               </div>
-              
+
               <div className={styles.formGroup}>
                 <label htmlFor="origen">Ciudad de origen *</label>
                 <input
@@ -204,7 +239,7 @@ const ShippingQuotePage: React.FC = () => {
                   placeholder="Ej. Tehuacán, Puebla"
                 />
               </div>
-              
+
               <div className={styles.formGroup}>
                 <label htmlFor="destino">Ciudad de destino *</label>
                 <input
@@ -217,7 +252,7 @@ const ShippingQuotePage: React.FC = () => {
                   placeholder="Ej. Ciudad de México"
                 />
               </div>
-              
+
               <div className={`${styles.formGroup} ${styles.fullWidth}`}>
                 <label>Dimensiones del paquete *</label>
                 <div className={styles.dimensionsGroup}>
@@ -256,7 +291,7 @@ const ShippingQuotePage: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className={`${styles.formGroup} ${styles.fullWidth}`} style={{ textAlign: 'center', marginTop: '20px' }}>
                 <button type="submit" className={styles.submitButton}>
                   <i className="fab fa-whatsapp"></i> Solicitar cotización por WhatsApp
@@ -268,7 +303,7 @@ const ShippingQuotePage: React.FC = () => {
       </section>
 
       {/* Footer Section */}
-      <FooterComponent/>
+      <FooterComponent />
     </div>
   );
 };
