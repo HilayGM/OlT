@@ -20,7 +20,7 @@ const agents: Agent[] = [
   {
     name: 'Juan Pérez',
     role: 'Agente de ventas',
-    imageUrl: '/images/juan.jpg',
+    imageUrl: './public/lic.webp',
     phone: '+522382186185',
     email: 'Martinlibreros0@gmail.com',
     whatsapp: '521234567890',

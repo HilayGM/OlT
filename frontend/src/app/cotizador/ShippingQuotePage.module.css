@@ -127,10 +127,12 @@
   color: white;
   font-size: 1.2rem;
   transition: all 0.3s ease;
+    text-decoration: none;
+  border: none;
 }
 
 .phone {
-  background-color: #e30613;
+  background-color: #34B7F1;
   color: #fff;
 }
 
@@ -139,15 +141,22 @@
 }
 
 .email {
-  background-color: #0072c6;
+  background-color:#EA4335;
   color: #fff;
 }
 
 .agentContact a:hover {
-  background-color: #e30613;
+  background-color: #06e348;
   color: white;
 }
 
+
+.agentContact .phone:hover {
+  background-color: #007BFF;
+}
+.agentContact .email:hover {
+  background-color: #c51f48;
+}
 .agentContact .whatsapp:hover {
   background-color: #128C7E;
 }
