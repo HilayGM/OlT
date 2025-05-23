@@ -1,5 +1,3 @@
-/* styles.module.css */
-
 /* Hero Section */
 .hero {
   background-color: #e30613;
@@ -27,7 +25,7 @@
 
 .whatsappBadge {
   display: inline-block;
-  background-color: #25D366;
+  background-color: #25d366;
   color: white;
   padding: 10px 20px;
   border-radius: 30px;
@@ -62,6 +60,14 @@
   max-width: 700px;
   margin: 0 auto;
   font-size: 1.1rem;
+}
+
+.sectionSubtitle {
+  color: #e30613;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  margin-top: 20px;
+  font-weight: bold;
 }
 
 .agentsGrid {
@@ -127,21 +133,21 @@
   color: white;
   font-size: 1.2rem;
   transition: all 0.3s ease;
-    text-decoration: none;
+  text-decoration: none;
   border: none;
 }
 
 .phone {
-  background-color: #34B7F1;
+  background-color: #34b7f1;
   color: #fff;
 }
 
 .whatsapp {
-  background-color: #25D366;
+  background-color: #25d366;
 }
 
 .email {
-  background-color:#EA4335;
+  background-color: #ea4335;
   color: #fff;
 }
 
@@ -150,15 +156,17 @@
   color: white;
 }
 
-
 .agentContact .phone:hover {
-  background-color: #007BFF;
+  background-color: #ffffff;
+  color: #007bff;
 }
 .agentContact .email:hover {
-  background-color: #c51f48;
+  color: #ea4335;
+  background-color: #ffffff;
 }
 .agentContact .whatsapp:hover {
-  background-color: #128C7E;
+  background-color: #ffffff;
+  color: #128c7e;
 }
 
 /* Quote Form Section */
@@ -242,7 +250,7 @@
 }
 
 .submitButton {
-  background-color: #25D366;
+  background-color: #25d366;
   color: white;
   border: none;
   padding: 15px 30px;
@@ -258,11 +266,120 @@
 }
 
 .submitButton:hover {
-  background-color: #128C7E;
+  background-color: #128c7e;
 }
 
 .submitButton i {
   font-size: 1.2rem;
+}
+
+/* Package Grid Styles */
+.packageGrid {
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.packageHeader {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr) 80px;
+  gap: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.packageRow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr) 80px;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.packageRow input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.packageActions {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.addPackageButton {
+  background-color: #e30613;
+  color: white;
+  border: none;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  font-size: 0.8rem;
+  transition: background-color 0.3s;
+}
+
+.addPackageButton:hover {
+  background-color: #c00;
+}
+
+.removePackageButton {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  font-size: 0.8rem;
+  transition: background-color 0.3s;
+}
+
+.removePackageButton:hover {
+  background-color: #c82333;
+}
+
+/* Remove the old styles that are no longer needed */
+.addPackageButtonContainer {
+  display: none;
+}
+
+.dimensionsDiagram {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.diagramImage {
+  max-width: 100%;
+  height: auto;
+}
+
+.noteText {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+  margin-top: 15px;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
 }
 
 /* Responsive adjustments */
@@ -270,17 +387,40 @@
   .formGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .fullWidth {
     grid-column: auto;
   }
-  
+
   .hero h1 {
     font-size: 2rem;
   }
-  
-  .sectionTitle h2, 
+
+  .sectionTitle h2,
   .formTitle h2 {
     font-size: 1.8rem;
+  }
+
+  .packageHeader,
+  .packageRow {
+    grid-template-columns: repeat(5, 1fr) 60px;
+    font-size: 0.8rem;
+  }
+
+  .packageRow input {
+    padding: 5px;
+    font-size: 0.8rem;
+  }
+
+  .packageActions {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .addPackageButton,
+  .removePackageButton {
+    width: 25px;
+    height: 25px;
+    font-size: 0.7rem;
   }
 }
