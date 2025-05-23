@@ -470,7 +470,7 @@ const ShippingQuotePage: React.FC = () => {
 
                 <div className={styles.dimensionsDiagram}>
                   <img
-                    src="/placeholder.svg?height=150&width=300"
+                    src="medidas.png?height=150&width=300"
                     alt="Dimensiones del paquete"
                     className={styles.diagramImage}
                   />
