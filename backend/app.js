@@ -19,6 +19,9 @@ try {
     console.log('No se pudo conectar a la base de datos:', error);
 }
 
-app.listen(8000, () => {
+
+const PORT = process.env.PORT || 8000;
+
+app.listen(8000, '0.0.0.0',() => {
     console.log('Servidor corriendo en el puerto 8000');
 });
