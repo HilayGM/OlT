@@ -1,128 +1,114 @@
 "use client"
 
-import type React from "react"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useBlogs } from "@/app/admin/hooks/useBlog"
 import Link from "next/link"
-import { useBlogs } from "../../hooks/useBlog"
 import "./create-blog.css"
 
 export default function CreateBlogPage() {
-  const [title, setTitle] = useState<string>("")
-  const [description, setDescription] = useState<string>("")
-  const [image, setImage] = useState<File | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
-
-  const router = useRouter()
   const { createBlog } = useBlogs()
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setImage(e.target.files[0])
+  const [form, setForm] = useState({
+    title: "",
+    description: "",
+    image: null as File | null,
+    imagePreview: "",
+  })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
+  const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      if (file.size > 15 * 1024 * 1024) {
+        alert("La imagen no puede superar los 15MB.")
+        return
+      }
+
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setForm((prev) => ({
+          ...prev,
+          image: file,
+          imagePreview: reader.result as string,
+        }))
+      }
+      reader.readAsDataURL(file)
     }
   }
 
-  const store = async (e: React.FormEvent<HTMLFormElement>) => {
+  const store = async (e: React.FormEvent) => {
     e.preventDefault()
-
-    if (!image) {
+    if (!form.image) {
       alert("Por favor selecciona una imagen.")
       return
     }
 
-    setLoading(true)
-
-    const formData = new FormData()
-    formData.append("title", title)
-    formData.append("description", description)
-    formData.append("image", image)
-
     try {
-      await createBlog(formData)
-      alert("Blog creado exitosamente")
-      router.push("/admin")
+      await createBlog({
+        title: form.title,
+        description: form.description,
+        image: form.image,
+      })
+
+      alert("✅ Blog creado con éxito")
     } catch (error) {
-      console.error("Error al crear el blog:", error)
-      alert("Error al crear el blog")
-    } finally {
-      setLoading(false)
+      console.error("❌ Error al crear el blog:", error)
+      alert("❌ Error al crear el blog")
     }
   }
 
   return (
-    <div className="blog-container">
-      <div className="blog-content">
-        <div className="breadcrumb">
-          <Link href="/admin" className="breadcrumb-link">
-            Admin
-          </Link>
-          <span className="breadcrumb-separator">›</span>
-          <Link href="/admin/blogs" className="breadcrumb-link">
-            Blogs
-          </Link>
-          <span className="breadcrumb-separator">›</span>
-          <span className="breadcrumb-current">Crear</span>
+    <div className="create-blog-container">
+      <h1>📝 Crear Nuevo Blog</h1>
+
+      <form onSubmit={store} className="create-blog-form">
+        <div className="form-group">
+          <label>Título</label>
+          <input
+            type="text"
+            name="title"
+            value={form.title}
+            onChange={handleChange}
+            required
+          />
         </div>
 
-        <h3 className="blog-title">Crear Nuevo Blog</h3>
+        <div className="form-group">
+          <label>Descripción</label>
+          <textarea
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            required
+            rows={4}
+          />
+        </div>
 
-        <form onSubmit={store} className="blog-form" encType="multipart/form-data">
-          <div className="form-group">
-            <label className="form-label">Título</label>
-            <input
-              type="text"
-              className="form-input"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-              disabled={loading}
-              placeholder="Ingresa el título del blog"
+        <div className="form-group">
+          <label>Imagen</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleChangeImage}
+            required
+          />
+          {form.imagePreview && (
+            <img
+              src={form.imagePreview}
+              alt="Vista previa"
+              className="image-preview"
             />
-          </div>
+          )}
+        </div>
 
-          <div className="form-group">
-            <label className="form-label">Descripción</label>
-            <textarea
-              className="form-textarea"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={5}
-              required
-              disabled={loading}
-              placeholder="Describe el contenido del blog"
-            />
-          </div>
+        <button type="submit" className="submit-button">Crear Blog</button>
+      </form>
 
-          <div className="form-group">
-            <label className="form-label">Imagen</label>
-            <input
-              type="file"
-              accept="image/*"
-              className="form-file"
-              onChange={handleImageChange}
-              required
-              disabled={loading}
-            />
-            {image && <small className="file-info">Archivo seleccionado: {image.name}</small>}
-          </div>
-
-          <div className="form-actions">
-            <button type="submit" className="btn btn-primary" disabled={loading}>
-              {loading ? (
-                <>
-                  <span className="spinner"></span>
-                  Creando...
-                </>
-              ) : (
-                "💾 Crear Blog"
-              )}
-            </button>
-
-            <Link href="/admin/blogs" className="btn btn-secondary">
-              ✕ Cancelar
-            </Link>
-          </div>
-        </form>
+      <div className="back-link">
+        <Link href="/admin">← Volver a la lista</Link>
       </div>
     </div>
   )

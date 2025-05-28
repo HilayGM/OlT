@@ -37,7 +37,7 @@ export default function NavbarComponent() {
                 <li><Link href="/">Inicio</Link></li>
                 <li><Link href="/cobertura">cobertura</Link></li>
                 <li><Link href="/servicios">Servicios</Link></li>
-                <li><Link href="/act">actualizaciones</Link></li>
+                <li><Link href="/actualizaciones">actualizaciones</Link></li>
                 <li><Link href="/cotizador">Cotizador</Link></li>
               </ul>
             </nav>
@@ -52,7 +52,7 @@ export default function NavbarComponent() {
               <li><Link href="/" onClick={toggleSidebar}>Inicio</Link></li>
               <li><Link href="/cobertura" onClick={toggleSidebar}>cobertura</Link></li>
               <li><Link href="/servicios" onClick={toggleSidebar}>Servicios</Link></li>
-              <li><Link href="/act" onClick={toggleSidebar}>actualizaciones</Link></li>
+              <li><Link href="/actualizaciones" onClick={toggleSidebar}>actualizaciones</Link></li>
               <li><Link href="/cotizador" onClick={toggleSidebar}>Cotizador</Link></li>
             </ul>
           </aside>

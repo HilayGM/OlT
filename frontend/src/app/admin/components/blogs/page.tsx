@@ -75,7 +75,7 @@ export default function ShowBlogsPage() {
         <div className="blogs-header">
           <h2 className="blogs-title">Gestión de Blogs</h2>
           <Link href="/admin/components/create" className="btn btn-primary">
-            ➕ Crear Nuevo Blog
+             Crear Nuevo Blog
           </Link>
         </div>
 
@@ -128,7 +128,7 @@ export default function ShowBlogsPage() {
                       </td>
                       <td>
                         <div className="blog-actions">
-                          <Link href={`/components/edit?id=${blog.id}`} className="btn btn-edit" title="Editar blog">
+                          <Link href={`/admin/components/edit?id=${blog.id}`} className="btn btn-edit" title="Editar blog">
                             ✏️ Editar
                           </Link>
                           <button

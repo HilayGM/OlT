@@ -1,14 +1,22 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+
+}
+
 /* Container principal */
 .blogs-container {
-  max-width: 1200px;
+  max-width: 100%;
+  align-items: center;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
 }
 
 .blogs-content {
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 0px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   animation: fadeIn 0.3s ease-in;
@@ -19,8 +27,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  
+  background: linear-gradient(135deg, #cc0000 0%, #ff0000 100%);
   color: white;
 }
 
@@ -196,23 +205,41 @@
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: #f30d0d;
   color: white;
+  
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .btn-primary:hover:not(:disabled) {
-  background-color: #0056b3;
+  background-color: #9c2323;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(221, 223, 226, 0.3);
 }
 
 .btn-edit {
-  background-color: #28a745;
+  background-color: #454545;
   color: white;
 }
 
 .btn-edit:hover:not(:disabled) {
-  background-color: #218838;
+  background-color: #686767;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
 }
@@ -262,7 +289,7 @@
   padding: 16px 20px;
   background: #f8f9fa;
   border-radius: 6px;
-  border-left: 4px solid #007bff;
+  border-left: 4px solid #9d2626;
 }
 
 .blogs-summary p {
@@ -302,6 +329,7 @@
 
   .blogs-table-container {
     padding: 20px;
+    
   }
 
   .blogs-table th,

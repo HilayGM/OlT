@@ -1,4 +1,3 @@
-"use client"
 
 import { useState, useEffect, useCallback } from "react"
 import axios from "axios"
@@ -9,9 +8,24 @@ interface Blog {
   id: number
   title: string
   description: string
-  image?: string
+  image?: string // En base64
   createdAt?: string
   updatedAt?: string
+}
+
+// 🔄 Convierte archivo a base64
+const fileToBase64 = (file: unknown): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    if (!(file instanceof Blob)) {
+      reject(new Error("El archivo no es un Blob o File válido."))
+      return
+    }
+
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result as string)
+    reader.onerror = (error) => reject(error)
+  })
 }
 
 export function useBlogs() {
@@ -23,11 +37,9 @@ export function useBlogs() {
     try {
       setLoading(true)
       setError(null)
-      console.log("🔍 Fetching blogs from API...")
 
       const res = await axios.get<Blog[]>(URI)
       setBlogs(res.data)
-      console.log("✅ Blogs loaded successfully:", res.data.length, "items")
     } catch (error) {
       console.error("❌ Error al obtener blogs:", error)
       setError("Error al cargar los blogs")
@@ -36,40 +48,64 @@ export function useBlogs() {
     }
   }, [])
 
-  const createBlog = useCallback(
-    async (formData: FormData) => {
-      try {
-        console.log("📝 Creating new blog...")
-        const response = await axios.post(URI, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        console.log("✅ Blog created successfully:", response.data)
+const createBlog = useCallback(
+  async (form: { title: string; description: string; image: File }) => {
+    try {
+      console.log("📝 Subiendo blog...")
 
-        // Actualizar la lista local sin hacer otra petición
-        await getBlogs()
-        return response.data
-      } catch (error) {
-        console.error("❌ Error al crear blog:", error)
-        throw error
+      // Validar campos básicos
+      if (!form.title || !form.description || !form.image) {
+        throw new Error("Todos los campos son obligatorios.")
       }
-    },
-    [getBlogs],
-  )
+
+      // Convertir la imagen a base64
+      const base64Image = await fileToBase64(form.image)
+      const imageBase64 = base64Image.split(",")[1] // Remueve el prefijo "data:image/jpeg;base64,"
+
+      // Enviar solicitud al backend
+      const response = await axios.post(URI, {
+        title: form.title,
+        description: form.description,
+        image: imageBase64,
+      })
+
+      console.log("✅ Blog creado:", response.data)
+
+      // Actualiza la lista de blogs
+      await getBlogs()
+
+      return response.data
+    } catch (error: any) {
+      // Mostrar mensaje de error detallado
+      const serverMessage = error?.response?.data?.message || error.message
+      console.error("❌ Error al crear blog:", serverMessage)
+      throw new Error(serverMessage)
+    }
+  },
+  [getBlogs]
+)
+
 
   const updateBlog = useCallback(
-    async (id: number, formData: FormData) => {
+    async (
+      id: number,
+      form: { title: string; description: string; image?: File }
+    ) => {
       try {
-        console.log(`📝 Updating blog ${id}...`)
-        const response = await axios.put(`${URI}${id}`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        console.log("✅ Blog updated successfully:", response.data)
+        let imageBase64: string | undefined
 
-        // Actualizar la lista local
+        if (form.image) {
+          const base64Image = await fileToBase64(form.image)
+          imageBase64 = base64Image.split(",")[1]
+        }
+
+        const response = await axios.put(`${URI}${id}`, {
+          title: form.title,
+          description: form.description,
+          image: imageBase64,
+        })
+
+        console.log("✅ Blog actualizado:", response.data)
         await getBlogs()
         return response.data
       } catch (error) {
@@ -77,17 +113,13 @@ export function useBlogs() {
         throw error
       }
     },
-    [getBlogs],
+    [getBlogs]
   )
 
   const deleteBlog = useCallback(async (id: number) => {
     try {
-      console.log(`🗑️ Deleting blog ${id}...`)
       await axios.delete(`${URI}${id}`)
-      console.log("✅ Blog deleted successfully")
-
-      // Actualizar la lista local sin hacer petición
-      setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog.id !== id))
+      setBlogs((prev) => prev.filter((blog) => blog.id !== id))
     } catch (error) {
       console.error("❌ Error al eliminar blog:", error)
       throw error
@@ -96,9 +128,7 @@ export function useBlogs() {
 
   const getBlogById = useCallback(async (id: number) => {
     try {
-      console.log(`🔍 Fetching blog ${id}...`)
       const response = await axios.get(`${URI}${id}`)
-      console.log("✅ Blog loaded:", response.data)
       return response.data
     } catch (error) {
       console.error("❌ Error al obtener blog:", error)

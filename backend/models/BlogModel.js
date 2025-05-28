@@ -16,7 +16,6 @@ const BlogModel = db.define('blog', {
   },
   image: {
     type: DataTypes.BLOB('long'), // si quieres guardar la imagen directamente (como mencionaste antes)
-    allowNull: false,
   }
 });
 
