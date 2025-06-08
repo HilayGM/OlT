@@ -212,7 +212,7 @@
         }
         
         /* Stats Section */
-        .stats {
+        .stats1 {
             max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
@@ -221,7 +221,7 @@
             text-align: center;
         }
         
-        .stat-item {
+        .stat-item1 {
             flex: 1;
             background-color: white;
             border-radius: 10px;
@@ -230,13 +230,13 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
-        .stat-icon {
+        .stat-icon1 {
             font-size: 40px;
             color: #e30613;
             margin-bottom: 15px;
         }
         
-        .stat-number {
+        .stat-number1 {
             font-size: 28px;
             font-weight: bold;
             color: #e30613;

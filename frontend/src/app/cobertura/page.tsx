@@ -5,6 +5,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Head from "next/head";
 import FooterComponent from '../../../components/footer/footer';
 import NavbarComponent from '../../../components/navbar/navbar';
+import { CgEnter } from 'react-icons/cg';
 
 function ConocenosPage() {
     return(
@@ -48,7 +49,7 @@ function ConocenosPage() {
         <div className="container1">
             <div className="section-title">
                 <h2>Cobertura Nacional OLT</h2>
-                <p>Contamos con una amplia red de distribución que nos permite llegar a todo el territorio nacional.</p>
+                <p>Empleando alianzas estratégicas con transportes de carga de gran prestigio, ofrecemos a nuestros clientes más opciones de envío y mayor cobertura a nivel Nacional.</p>
             </div>
             
             <div className="coverage-grid">
@@ -62,8 +63,8 @@ function ConocenosPage() {
                             <i className="fas fa-truck"></i>
                         </div>
                         <div className="stat-content">
-                            <h3>560 Destinos</h3>
-                            <p>Con recolección y entrega a domicilio en todo México.</p>
+                            <h3>624 Destinos</h3>
+                            <p>Se realiza la recolección y entrega a domicilio de tus paquetes</p>
                         </div>
                     </div>
                     
@@ -72,8 +73,8 @@ function ConocenosPage() {
                             <i className="fas fa-building"></i>
                         </div>
                         <div className="stat-content">
-                            <h3>89 Destinos</h3>
-                            <p>Con entrega ocurre oficina para mayor comodidad.</p>
+                            <h3>124 Destinos</h3>
+                            <p>Puede recoger en las oficinas de paquetería ubicadas en todo el país.</p>
                         </div>
                     </div>
                     
@@ -135,7 +136,7 @@ function ConocenosPage() {
                     
                     <div className="mission-item">
                         <h3><i className="fas fa-bullseye"></i> Nuestra Misión</h3>
-                        <p>Asegurar la satisfacción de nuestros clientes, ofreciendo servicios y cobertura con los tiempos adecuados de entrega, siendo así el enlace estratégico entre nuestros clientes al brindar un servicio Confiable, Seguro y Flexible.</p>
+                        <p>Asegurar la calidad del servicio con el manejo adecuado de las mercancías y cumplir con los tiempos de entrega establecidos.</p>
                     </div>
                     
                     <div className="mission-item">
@@ -155,7 +156,7 @@ function ConocenosPage() {
         <div className="container1">
             <h2>¿Necesitas una cotización?</h2>
             <p>Si deseas saber el tiempo de entrega de un origen y un punto de entrega distinto, ve a contacto y elige a un asesor logístico para recibir toda la información que necesitas.</p>
-            <a href="#" className="cta-button">Cotiza ahora</a>
+            <a href="/cotizador" className="cta-button">Cotiza ahora</a>
         </div>
     </section>
         
