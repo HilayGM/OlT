@@ -81,8 +81,8 @@ export default function PublicBlogList() {
       <main className="blog-container">
         <header className="blog-header1">
           <h1 className="blog-title1">Blog Logístico de México</h1>
-          <p className="blog-subtitle">Soluciones y Casos de Éxito OLT</p>
-          <p className="blog-subtitle">Descubre las últimas publicaciones y mantente al día con nuestro contenido</p>
+          <p className="blog-subtitle1">Soluciones y Casos de Éxito OLT</p>
+          <p className="blog-subtitle1">Descubre las últimas publicaciones y mantente al día con nuestro contenido</p>
         </header>
 
         {blogs.length === 0 ? (

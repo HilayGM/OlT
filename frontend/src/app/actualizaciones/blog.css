@@ -26,16 +26,17 @@
 .blog-title1 {
   font-size: 3rem;
   font-weight: 800;
+  font-weight: bold;
   color: #ff0000;
   margin-bottom: 1rem;
   letter-spacing: -0.025em;
 }
 
 .blog-subtitle1 {
-  font-size: 1.25rem;
-  color: #ff0000;
-  max-width: 600px;
+  color: #666;
+  max-width: 800px;
   margin: 0 auto;
+  font-size: 1.1rem;
   line-height: 1.6;
 }
 
