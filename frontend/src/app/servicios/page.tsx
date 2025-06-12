@@ -190,7 +190,7 @@ const CTASection: React.FC = () => {
         <h2>¿Listo para enviar?</h2>
         <p>Contáctanos hoy mismo para obtener una cotización personalizada o para resolver cualquier duda sobre nuestros servicios.</p>
         <div className={styles.ctaButtons}>
-          <a href="cotizador" className={`${styles.ctaButton} ${styles.primary}`}>Solicitar cotización</a>
+          <a href="/cotizador" className={`${styles.ctaButton} ${styles.primary}`}>Solicitar cotización</a>
         </div>
       </div>
     </section>
@@ -235,7 +235,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ isOpen, service, onClose })
           )}
         </div>
         <div className={styles.modalFooter}>
-          <a href="cotizar.html" className={styles.modalButton}>Solicitar cotización</a>
+          <a href="/cotizador" className={styles.modalButton}>Solicitar cotización</a>
         </div>
       </div>
     </div>
