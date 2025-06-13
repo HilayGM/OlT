@@ -7,50 +7,6 @@ import FooterComponent from "../../../components/footer/footer"
 import NavbarComponent from "../../../components/navbar/navbar"
 import styles from "./ShippingQuotePage.module.css"
 
-interface Agent {
-  name: string
-  role: string
-  imageUrl: string
-  phone: string
-  email: string
-  whatsapp: string
-}
-
-const agents: Agent[] = [
-  {
-    name: "Felipe Reyes",
-    role: "Asesor logístico",
-    imageUrl: "/lic.webp",
-    phone: "+522381652135",
-    email: "freyes@oltenvios.com",
-    whatsapp: "2381652135",
-  },
-  {
-    name: "Raúl Maceda",
-    role: "Atención al cliente",
-    imageUrl: "/images/maria.jpg",
-    phone: "+522381524866",
-    email: "clientes@oltenvios.com",
-    whatsapp: "522381524866",
-  },
-  {
-    name: "Ivan Reyes",
-    role: "Atención a Clientes",
-    imageUrl: "/images/carlos.jpg",
-    phone: "+522382219925",
-    email: "asesor04@oltenvios.com",
-    whatsapp: "522382219925",
-  },
-  {
-    name: "Beatriz Dominguez",
-    role: " Administración",
-    imageUrl: "/images/ana.jpg",
-    phone: "+52238 170 0889",
-    email: "ana@logistica.com",
-    whatsapp: "52238 170 0889",
-  },
-]
-
 interface PackageItem {
   cantidad: string
   peso: string
@@ -75,8 +31,19 @@ interface FormData {
   destinoColonia: string
   // Paquetes
   paquetes: PackageItem[]
-  agente: string
 }
+
+// Lista de servicios disponibles para el checklist
+const serviceOptions = [
+  { id: "cotizacion", label: "Cotización y ventas", icon: "fa-calculator" },
+  { id: "recoleccion", label: "Programa tu recolección", icon: "fa-truck" },
+  { id: "rastreo", label: "Rastreo de mercancía", icon: "fa-search" },
+  { id: "facturacion", label: "Facturación electrónica", icon: "fa-file-invoice" },
+  { id: "sucursal", label: "Ubica tu sucursal", icon: "fa-map-marker-alt" },
+  { id: "informacion", label: "Información", icon: "fa-info-circle" },
+  { id: "inconformidad", label: "Inconformidad con el servicio", icon: "fa-exclamation-triangle" },
+  { id: "atencion", label: "Atención a clientes", icon: "fa-headset" },
+]
 
 const ShippingQuotePage: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -95,8 +62,10 @@ const ShippingQuotePage: React.FC = () => {
     destinoColonia: "",
     // Paquetes
     paquetes: [{ cantidad: "", peso: "", largo: "", ancho: "", alto: "" }],
-    agente: "",
   })
+
+  // Estado para los servicios seleccionados
+  const [selectedServices, setSelectedServices] = useState<string[]>([])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -117,6 +86,37 @@ const ShippingQuotePage: React.FC = () => {
     })
   }
 
+  // Manejar cambios en el checklist de servicios
+  const handleServiceToggle = (serviceId: string) => {
+    setSelectedServices((prev) => {
+      if (prev.includes(serviceId)) {
+        return prev.filter((id) => id !== serviceId)
+      } else {
+        return [...prev, serviceId]
+      }
+    })
+  }
+
+  // Enviar servicios seleccionados por WhatsApp
+  const handleSendServices = () => {
+    if (selectedServices.length === 0) {
+      alert("Por favor selecciona al menos un servicio")
+      return
+    }
+
+    const selectedServiceLabels = selectedServices
+      .map((id) => serviceOptions.find((service) => service.id === id)?.label)
+      .filter(Boolean)
+
+    let mensaje = `Hola, necesito ayuda con los siguientes servicios:%0A%0A`
+    selectedServiceLabels.forEach((label) => {
+      mensaje += `- ${label}%0A`
+    })
+
+    const whatsappNumber = "522381652135" // Número por defecto
+    window.open(`https://wa.me/${whatsappNumber}?text=${mensaje}`, "_blank")
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -133,11 +133,11 @@ const ShippingQuotePage: React.FC = () => {
       destinoCP,
       destinoColonia,
       paquetes,
-      agente,
     } = formData
 
     let mensaje = `Hola, solicito una cotización para envío de mercancía:%0A%0A`
     mensaje += `*Nombre:* ${nombre}%0A`
+    if (telefono) mensaje += `*Teléfono:* ${telefono}%0A`
     mensaje += `*Mercancía:* ${mercancia}%0A`
 
     // Origen
@@ -153,21 +153,16 @@ const ShippingQuotePage: React.FC = () => {
     // Paquetes
     mensaje += `*Paquetes:*%0A`
     paquetes.forEach((paquete, index) => {
-      if (paquete.cantidad !== "Piezas" && paquete.peso !== "Kilos") {
-        mensaje += `Paquete ${index + 1}: ${paquete.cantidad} piezas, ${paquete.peso} kg, ${paquete.largo}x${paquete.ancho}x${paquete.alto} cm%0A`
+      if (paquete.cantidad && paquete.peso) {
+        mensaje += `Paquete ${index + 1}: ${paquete.cantidad} piezas, ${paquete.peso} kg`
+        if (paquete.largo && paquete.ancho && paquete.alto) {
+          mensaje += `, ${paquete.largo}x${paquete.ancho}x${paquete.alto} cm`
+        }
+        mensaje += `%0A`
       }
     })
 
-    let whatsappNumber = "522381652135"
-
-    if (agente) {
-      const selectedAgent = agents.find((agent) => agent.name === agente)
-      if (selectedAgent) {
-        whatsappNumber = selectedAgent.whatsapp
-      }
-      mensaje += `*Agente solicitado:* ${agente}%0A`
-    }
-
+    const whatsappNumber = "522381652135"
     window.open(`https://wa.me/${whatsappNumber}?text=${mensaje}`, "_blank")
   }
 
@@ -175,338 +170,324 @@ const ShippingQuotePage: React.FC = () => {
     <div>
       <NavbarComponent />
 
-      {/* Hero Section */}
+      {/* Hero Section - Reducido */}
       <section className={styles.hero}>
         <div className={styles.heroContainer}>
-          <h1>Cotiza tu envío en minutos</h1>
-          <p>
-            Obtén una cotización rápida y personalizada para tus envíos de mercancía. Nuestro equipo de expertos te
-            atenderá directamente por WhatsApp.
-          </p>
+          <h1>Cotiza tu envío</h1>
+          <p>Obtén una cotización rápida por WhatsApp</p>
           <div className={styles.whatsappBadge}>
             <i className="fab fa-whatsapp"></i> Cotización vía WhatsApp
           </div>
         </div>
       </section>
 
-      <section className={styles.agents}>
-        <div className={styles.sectionTitle}>
-          <h2>Nuestros Agentes</h2>
-          <p>Contacta directamente con nuestros asesores para ayudarte en tu proceso logístico.</p>
-        </div>
+      {/* Main Content - Dos columnas */}
+      <section className={styles.mainContent}>
+        <div className={styles.contentContainer}>
+          {/* Columna Izquierda - Servicios */}
+          <div className={styles.servicesColumn}>
+            <div className={styles.servicesChecklist}>
+              <h3>¿En qué podemos ayudarte?</h3>
+              <p>Selecciona los servicios que necesitas y envía tu consulta directamente a nuestro asesor:</p>
 
-        <div className={styles.agentsGrid}>
-          {agents.map((agent, index) => (
-            <div key={index} className={styles.agentCard}>
-              <div className={styles.agentImage}>
-                <img src={agent.imageUrl || "/placeholder.svg"} alt={agent.name} />
+              <div className={styles.checklistContainer}>
+                {serviceOptions.map((service) => (
+                  <div key={service.id} className={styles.checklistItem}>
+                    <label className={styles.checkboxLabel}>
+                      <input
+                        type="checkbox"
+                        checked={selectedServices.includes(service.id)}
+                        onChange={() => handleServiceToggle(service.id)}
+                        className={styles.checkboxInput}
+                      />
+                      <span className={styles.checkmark}></span>
+                      <i className={`fas ${service.icon} ${styles.serviceIcon}`}></i>
+                      <span className={styles.serviceLabel}>{service.label}</span>
+                    </label>
+                  </div>
+                ))}
               </div>
-              <div className={styles.agentInfo}>
-                <h3>{agent.name}</h3>
-                <p>{agent.role}</p>
-                <div className={styles.agentContact}>
-                  <a href={`tel:${agent.phone}`} className={styles.phone} title="Llamar">
-                    <i className="fas fa-phone"></i>
-                  </a>
-                  <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-                      const mailtoLink = `mailto:${agent.email}`
-                      const gmailLink = `https://mail.google.com/mail/?view=cm&to=${agent.email}`
 
-                      window.open(isMobile ? mailtoLink : gmailLink, "_blank")
-                    }}
-                    className={styles.email}
-                    title="Correo"
-                  >
-                    <i className="fas fa-envelope"></i>
-                  </a>
-
-                  <a
-                    href={`https://wa.me/${agent.whatsapp}`}
-                    className={styles.whatsapp}
-                    title="WhatsApp"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fab fa-whatsapp"></i>
-                  </a>
-                </div>
-              </div>
+              <button className={styles.sendServicesButton} onClick={handleSendServices}>
+                <i className="fab fa-whatsapp"></i> Enviar consulta
+              </button>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* Quote Form Section */}
-      <section className={styles.quoteForm}>
-        <div className={styles.formContainer}>
-          <div className={styles.formTitle}>
-            <h2>Solicita tu cotización</h2>
-            <p>Completa el formulario y te enviaremos las mejores propuestas por WhatsApp en menos de 30 minutos</p>
+            {/* Información de contacto */}
+
           </div>
 
-          <form id="cotizacion-form" onSubmit={handleSubmit}>
-            <div className={styles.formGrid}>
-              <div className={styles.formGroup}>
-                <label htmlFor="nombre">Nombre completo *</label>
-                <input
-                  type="text"
-                  id="nombre"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Nombre completo"
-                />
+          {/* Columna Derecha - Formulario de Cotización */}
+          <div className={styles.quoteColumn}>
+            <div className={styles.formContainer}>
+              <div className={styles.formTitle}>
+                <h2>Solicita tu cotización</h2>
+                <p>Completa el formulario y te enviaremos la cotización por WhatsApp</p>
               </div>
 
-              <div className={styles.formGroup}>
-                <label htmlFor="agente">Agente de preferencia</label>
-                <select id="agente" name="agente" value={formData.agente} onChange={handleInputChange}>
-                  <option value="">Seleccionar agente (opcional)</option>
-                  {agents.map((agent) => (
-                    <option key={agent.name} value={agent.name}>
-                      {agent.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* ORIGEN Section */}
-              <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                <h3 className={styles.sectionSubtitle}>ORIGEN</h3>
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="origenCiudad">Ciudad *</label>
-                <input
-                  type="text"
-                  id="origenCiudad"
-                  name="origenCiudad"
-                  value={formData.origenCiudad}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Ej. TEHUACAN"
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="origenEstado">Estado *</label>
-                <input
-                  type="text"
-                  id="origenEstado"
-                  name="origenEstado"
-                  value={formData.origenEstado}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Ej. PUEBLA"
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="origenCP">Código postal *</label>
-                <input
-                  type="text"
-                  id="origenCP"
-                  name="origenCP"
-                  value={formData.origenCP}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="75700"
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="origenColonia">Colonia *</label>
-                <input
-                  type="text"
-                  id="origenColonia"
-                  name="origenColonia"
-                  value={formData.origenColonia}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="CENTRO"
-                />
-              </div>
-
-              {/* DESTINO Section */}
-              <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                <h3 className={styles.sectionSubtitle}>DESTINO</h3>
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="destinoCiudad">Ciudad *</label>
-                <input
-                  type="text"
-                  id="destinoCiudad"
-                  name="destinoCiudad"
-                  value={formData.destinoCiudad}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Ej. MONTERREY"
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="destinoEstado">Estado *</label>
-                <input
-                  type="text"
-                  id="destinoEstado"
-                  name="destinoEstado"
-                  value={formData.destinoEstado}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Ej. NUEVO LEON"
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="destinoCP">Código postal *</label>
-                <input
-                  type="text"
-                  id="destinoCP"
-                  name="destinoCP"
-                  value={formData.destinoCP}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="64000"
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="destinoColonia">Colonia *</label>
-                <input
-                  type="text"
-                  id="destinoColonia"
-                  name="destinoColonia"
-                  value={formData.destinoColonia}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="CENTRO"
-                />
-              </div>
-
-              {/* Packages Section */}
-              <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                <h3 className={styles.sectionSubtitle}>Captura la siguiente información de tus paquetes y tarimas</h3>
-                <div className={styles.packageGrid}>
-                  <div className={styles.packageHeader}>
-                    <div>Cantidad</div>
-                    <div>Peso</div>
-                    <div>Largo</div>
-                    <div>Ancho</div>
-                    <div>Alto</div>
-                    <div>Acciones</div>
+              <form id="cotizacion-form" onSubmit={handleSubmit}>
+                <div className={styles.formGrid}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="nombre">Nombre completo *</label>
+                    <input
+                      type="text"
+                      id="nombre"
+                      name="nombre"
+                      value={formData.nombre}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="Nombre completo"
+                    />
                   </div>
 
-                  {formData.paquetes.map((paquete, index) => (
-                    <div key={index} className={styles.packageRow}>
-                      <input
-                        type="text"
-                        value={paquete.cantidad}
-                        onChange={(e) => handlePackageChange(index, "cantidad", e.target.value)}
-                        placeholder="Número de piezas"
-                      />
-                      <input
-                        type="text"
-                        value={paquete.peso}
-                        onChange={(e) => handlePackageChange(index, "peso", e.target.value)}
-                        placeholder="Peso en kilos"
-                      />
-                      <input
-                        type="text"
-                        value={paquete.largo}
-                        onChange={(e) => handlePackageChange(index, "largo", e.target.value)}
-                        placeholder="Largo en cm"
-                      />
-                      <input
-                        type="text"
-                        value={paquete.ancho}
-                        onChange={(e) => handlePackageChange(index, "ancho", e.target.value)}
-                        placeholder="Ancho en cm"
-                      />
-                      <input
-                        type="text"
-                        value={paquete.alto}
-                        onChange={(e) => handlePackageChange(index, "alto", e.target.value)}
-                        placeholder="Alto en cm"
-                      />
-                      <div className={styles.packageActions}>
-                        <button
-                          type="button"
-                          className={styles.addPackageButton}
-                          onClick={() => {
-                            setFormData((prev) => ({
-                              ...prev,
-                              paquetes: [...prev.paquetes, { cantidad: "", peso: "", largo: "", ancho: "", alto: "" }],
-                            }))
-                          }}
-                          title="Agregar paquete"
-                        >
-                          <i className="fas fa-plus"></i>
-                        </button>
-                        {formData.paquetes.length > 1 && (
-                          <button
-                            type="button"
-                            className={styles.removePackageButton}
-                            onClick={() => {
-                              setFormData((prev) => ({
-                                ...prev,
-                                paquetes: prev.paquetes.filter((_, i) => i !== index),
-                              }))
-                            }}
-                            title="Eliminar paquete"
-                          >
-                            <i className="fas fa-trash"></i>
-                          </button>
-                        )}
+                  <div className={styles.formGroup}>
+                    <label htmlFor="telefono">Teléfono</label>
+                    <input
+                      type="tel"
+                      id="telefono"
+                      name="telefono"
+                      value={formData.telefono}
+                      onChange={handleInputChange}
+                      placeholder="Número de teléfono"
+                    />
+                  </div>
+
+                  {/* ORIGEN Section */}
+                  <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                    <h3 className={styles.sectionSubtitle}>ORIGEN</h3>
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="origenCiudad">Ciudad *</label>
+                    <input
+                      type="text"
+                      id="origenCiudad"
+                      name="origenCiudad"
+                      value={formData.origenCiudad}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="Ej. TEHUACAN"
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="origenEstado">Estado *</label>
+                    <input
+                      type="text"
+                      id="origenEstado"
+                      name="origenEstado"
+                      value={formData.origenEstado}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="Ej. PUEBLA"
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="origenCP">Código postal *</label>
+                    <input
+                      type="text"
+                      id="origenCP"
+                      name="origenCP"
+                      value={formData.origenCP}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="75700"
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="origenColonia">Colonia *</label>
+                    <input
+                      type="text"
+                      id="origenColonia"
+                      name="origenColonia"
+                      value={formData.origenColonia}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="CENTRO"
+                    />
+                  </div>
+
+                  {/* DESTINO Section */}
+                  <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                    <h3 className={styles.sectionSubtitle}>DESTINO</h3>
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="destinoCiudad">Ciudad *</label>
+                    <input
+                      type="text"
+                      id="destinoCiudad"
+                      name="destinoCiudad"
+                      value={formData.destinoCiudad}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="Ej. MONTERREY"
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="destinoEstado">Estado *</label>
+                    <input
+                      type="text"
+                      id="destinoEstado"
+                      name="destinoEstado"
+                      value={formData.destinoEstado}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="Ej. NUEVO LEON"
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="destinoCP">Código postal *</label>
+                    <input
+                      type="text"
+                      id="destinoCP"
+                      name="destinoCP"
+                      value={formData.destinoCP}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="64000"
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="destinoColonia">Colonia *</label>
+                    <input
+                      type="text"
+                      id="destinoColonia"
+                      name="destinoColonia"
+                      value={formData.destinoColonia}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="CENTRO"
+                    />
+                  </div>
+
+                  {/* Packages Section */}
+                  <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                    <h3 className={styles.sectionSubtitle}>Información de paquetes</h3>
+                    <div className={styles.packageGrid}>
+                      <div className={styles.packageHeader}>
+                        <div>Cantidad</div>
+                        <div>Peso</div>
+                        <div>Largo</div>
+                        <div>Ancho</div>
+                        <div>Alto</div>
+                        <div>Acciones</div>
                       </div>
+
+                      {formData.paquetes.map((paquete, index) => (
+                        <div key={index} className={styles.packageRow}>
+                          <input
+                            type="text"
+                            value={paquete.cantidad}
+                            onChange={(e) => handlePackageChange(index, "cantidad", e.target.value)}
+                            placeholder="Piezas"
+                          />
+                          <input
+                            type="text"
+                            value={paquete.peso}
+                            onChange={(e) => handlePackageChange(index, "peso", e.target.value)}
+                            placeholder="Kilos"
+                          />
+                          <input
+                            type="text"
+                            value={paquete.largo}
+                            onChange={(e) => handlePackageChange(index, "largo", e.target.value)}
+                            placeholder="cm"
+                          />
+                          <input
+                            type="text"
+                            value={paquete.ancho}
+                            onChange={(e) => handlePackageChange(index, "ancho", e.target.value)}
+                            placeholder="cm"
+                          />
+                          <input
+                            type="text"
+                            value={paquete.alto}
+                            onChange={(e) => handlePackageChange(index, "alto", e.target.value)}
+                            placeholder="cm"
+                          />
+                          <div className={styles.packageActions}>
+                            <button
+                              type="button"
+                              className={styles.addPackageButton}
+                              onClick={() => {
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  paquetes: [
+                                    ...prev.paquetes,
+                                    { cantidad: "", peso: "", largo: "", ancho: "", alto: "" },
+                                  ],
+                                }))
+                              }}
+                              title="Agregar paquete"
+                            >
+                              <i className="fas fa-plus"></i>
+                            </button>
+                            {formData.paquetes.length > 1 && (
+                              <button
+                                type="button"
+                                className={styles.removePackageButton}
+                                onClick={() => {
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    paquetes: prev.paquetes.filter((_, i) => i !== index),
+                                  }))
+                                }}
+                                title="Eliminar paquete"
+                              >
+                                <i className="fas fa-trash"></i>
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+
+                    <div className={styles.dimensionsDiagram}>
+                      <img
+                        src="medidas.png?height=120&width=240"
+                        alt="Dimensiones del paquete"
+                        className={styles.diagramImage}
+                      />
+                    </div>
+                  </div>
+
+                  <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                    <label htmlFor="mercancia">¿Qué desea transportar? *</label>
+                    <textarea
+                      id="mercancia"
+                      name="mercancia"
+                      value={formData.mercancia}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="Describe el tipo de mercancía que deseas enviar"
+                      className={styles.textarea}
+                    />
+                  </div>
+
+                  <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                    <p className={styles.noteText}>
+                      Para fletes locales o foráneos, contáctanos para evaluar el volumen y peso de tus mercancías.
+                    </p>
+                  </div>
+
+                  <div
+                    className={`${styles.formGroup} ${styles.fullWidth}`}
+                    style={{ textAlign: "center", marginTop: "20px" }}
+                  >
+                    <button type="submit" className={styles.submitButton}>
+                      <i className="fab fa-whatsapp"></i> Solicitar cotización por WhatsApp
+                    </button>
+                  </div>
                 </div>
-
-                <div className={styles.dimensionsDiagram}>
-                  <img
-                    src="medidas.png?height=150&width=300"
-                    alt="Dimensiones del paquete"
-                    className={styles.diagramImage}
-                  />
-                </div>
-              </div>
-
-              <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                <label htmlFor="mercancia">¿Qué desea transportar? *</label>
-                <textarea
-                  id="mercancia"
-                  name="mercancia"
-                  value={formData.mercancia}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Describe detalladamente el tipo de mercancía que deseas enviar"
-                  className={styles.textarea}
-                />
-              </div>
-
-              <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                <p className={styles.noteText}>
-                  Si deseas cotizar un Flete Local o Foráneo, escríbenos para saber más del volumen y peso de las
-                  mercancías que deseas transportar, para así elegir el tipo de unidad.
-                </p>
-              </div>
-
-              <div
-                className={`${styles.formGroup} ${styles.fullWidth}`}
-                style={{ textAlign: "center", marginTop: "20px" }}
-              >
-                <button type="submit" className={styles.submitButton}>
-                  <i className="fab fa-whatsapp"></i> Solicitar cotización por WhatsApp
-                </button>
-              </div>
+              </form>
             </div>
-          </form>
+          </div>
         </div>
       </section>
 

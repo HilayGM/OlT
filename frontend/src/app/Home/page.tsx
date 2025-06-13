@@ -250,13 +250,6 @@ function PrincipalPage() {
               <ChevronRight className="carousel-icon" />
             </button>
 
-            <button
-              className="carousel-button carousel-button-pause"
-              onClick={togglePause}
-              aria-label={isPaused ? "Reproducir carrusel" : "Pausar carrusel"}
-            >
-              {isPaused ? <Play className="carousel-icon" /> : <Pause className="carousel-icon" />}
-            </button>
           </div>
 
           <div className="carousel-dots">
