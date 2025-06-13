@@ -1,15 +1,35 @@
-/* Estilos existentes del CSS original */
-.hero1 {
-  background: linear-gradient(135deg, #cc0000 0%, #cc0000 100%);
-  color: white;
-  padding: 100px 0;
-  text-align: center;
+/* Estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .container1 {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  width: 100%;
+}
+
+/* Hero Section */
+.hero1 {
+  background: linear-gradient(135deg, #cc0000 0%, #cc0000 100%);
+  color: white;
+  padding: 80px 0;
+  text-align: center;
 }
 
 .hero1 h1 {
@@ -25,6 +45,7 @@
   line-height: 1.6;
 }
 
+/* About Section */
 .about-section {
   padding: 80px 0;
   background: #f8f9fa;
@@ -57,6 +78,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* Coverage Section */
 .coverage-section {
   padding: 80px 0;
 }
@@ -95,14 +117,26 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+.coverage-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .coverage-stat {
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   padding: 20px;
   background: white;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.coverage-stat:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .stat-icon {
@@ -116,6 +150,11 @@
   justify-content: center;
   margin-right: 20px;
   font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  flex: 1;
 }
 
 .stat-content h3 {
@@ -130,10 +169,10 @@
   line-height: 1.5;
 }
 
-/* Nuevos estilos para las cards de estados */
+/* States Grid */
 .states-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
   margin-top: 40px;
 }
@@ -146,12 +185,13 @@
   transition: all 0.3s ease;
   cursor: pointer;
   border: 2px solid transparent;
+  height: 100%;
 }
 
 .state-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-  border-color: red;
+  border-color: #cc0000;
 }
 
 .state-card-header {
@@ -171,6 +211,7 @@
   justify-content: center;
   margin-right: 15px;
   font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
 .state-card h3 {
@@ -219,7 +260,7 @@
   letter-spacing: 0.5px;
 }
 
-/* Estilos para el modal */
+/* Modal Styles */
 .modal {
   display: none;
   position: fixed;
@@ -404,6 +445,7 @@
   text-decoration: none;
 }
 
+/* Mission Section */
 .mission-section {
   padding: 80px 0;
   background: #f8f9fa;
@@ -429,6 +471,12 @@
   background: white;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mission-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .mission-item h3 {
@@ -457,6 +505,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* CTA Section */
 .cta-section {
   padding: 80px 0;
   background: linear-gradient(135deg, #cc0000 0%, #cc0000 100%);
@@ -480,57 +529,237 @@
 }
 
 .cta-button {
-  background: white;
-  color: #cc0000;
-  padding: 15px 40px;
-  border-radius: 30px;
+  background: #ffffff;
+  color: #e60012;
+  padding: 12px 32px;
+  border-radius: 8px;
   text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
+  font-weight: 600;
   display: inline-block;
+  transition: all 0.3s ease;
 }
 
 .cta-button:hover {
+  background: #e60012;
+  color: white;
+  border: white 1px solid;
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  color: #791a1a;
-  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .about-grid,
+/* Responsive Design - Tablets */
+@media (max-width: 1024px) {
+  .hero1 h1 {
+    font-size: 2.5rem;
+  }
+
+  .section-title h2,
+  .about-content h2,
+  .mission-content h2 {
+    font-size: 2.2rem;
+  }
+
   .coverage-grid,
+  .about-grid,
   .mission-grid {
-    grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  .states-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .coverage-stat {
+    padding: 15px;
+  }
+
+  .stat-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.3rem;
+  }
+
+  .stat-content h3 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 768px) {
+  .hero1 {
+    padding: 60px 0;
   }
 
   .hero1 h1 {
     font-size: 2rem;
   }
 
+  .hero1 p {
+    font-size: 1rem;
+  }
+
+  .about-section,
+  .coverage-section,
+  .mission-section,
+  .cta-section {
+    padding: 50px 0;
+  }
+
+  .about-grid,
+  .coverage-grid,
+  .mission-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .section-title {
+    margin-bottom: 40px;
+  }
+
   .section-title h2,
   .about-content h2,
-  .mission-content h2 {
-    font-size: 2rem;
+  .mission-content h2,
+  .cta-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
   }
 
   .states-grid {
     grid-template-columns: 1fr;
   }
 
+  .coverage-info {
+    order: -1; /* Mueve la información de cobertura arriba del mapa en móvil */
+  }
+
   .modal-content {
     width: 95%;
-    margin: 20px;
+    margin: 10px;
+    max-height: 85vh;
+  }
+
+  .modal-header {
+    padding: 30px 20px 20px;
+  }
+
+  .modal-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+
+  .coverage-summary {
+    grid-template-columns: 1fr;
   }
 
   .cities-grid {
     grid-template-columns: 1fr;
   }
 
-  .coverage-summary {
-    grid-template-columns: 1fr;
+  .close-modal {
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+  }
+}
+
+/* Responsive Design - Small Mobile */
+@media (max-width: 480px) {
+  .hero1 h1 {
+    font-size: 1.8rem;
+  }
+
+  .coverage-stat {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .stat-icon {
+    margin: 0 0 15px 0;
+  }
+
+  .state-card {
+    padding: 20px;
+  }
+
+  .state-card-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .state-icon {
+    margin: 0 0 15px 0;
+  }
+
+  .modal-body h3 {
+    font-size: 1.3rem;
+  }
+
+  .city-item {
+    padding: 12px;
+  }
+
+  .city-name {
+    font-size: 1rem;
+  }
+
+  .service-badge {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+
+  .cta-button {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.coverage-stat,
+.state-card,
+.mission-item {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.coverage-stat:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.coverage-stat:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.coverage-stat:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Mejoras de accesibilidad */
+.service-badge.pickup {
+  color: #000; /* Mejor contraste para accesibilidad */
+  font-weight: 700;
+}
+
+/* Mejoras para pantallas de alta densidad */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .hero1,
+  .cta-section {
+    background: linear-gradient(135deg, #cc0000 0%, #b30000 100%);
   }
 }

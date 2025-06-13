@@ -1,6 +1,6 @@
 "use client"
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import "./conocenos.css"
 import "@fortawesome/fontawesome-free/css/all.min.css"
 import Head from "next/head"
@@ -1780,6 +1780,21 @@ const StateModal: React.FC<StateModalProps> = ({ isOpen, state, onClose }) => {
 function ConocenosPage() {
   const [selectedState, setSelectedState] = useState<StateDetail | null>(null)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [isMobile, setIsMobile] = useState<boolean>(false)
+
+  // Detectar si es dispositivo móvil
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+
+    return () => {
+      window.removeEventListener("resize", checkMobile)
+    }
+  }, [])
 
   // Gestiona la apertura del modal
   const handleStateClick = (state: StateDetail) => {
@@ -1805,6 +1820,7 @@ function ConocenosPage() {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
       <section className="hero1">
