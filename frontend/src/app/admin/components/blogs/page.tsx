@@ -7,7 +7,7 @@ import "./show-blogs.css"
 
 
 
-const URI = "http://localhost:8000/blogs/"
+const URI = "http://137.184.40.168:8000/blogs/"
 
 interface Blog {
   id: number
