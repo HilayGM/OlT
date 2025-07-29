@@ -1,5 +1,4 @@
 "use client"
-
 import { useEffect, useState } from "react"
 import axios from "axios"
 import FooterComponent from "../../../components/footer/footer"
@@ -11,18 +10,36 @@ interface Blog {
   title: string
   description: string
   image: string
+  category?: string
+  date?: string
 }
 
 export default function PublicBlogList() {
   const [blogs, setBlogs] = useState<Blog[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedBlog, setSelectedBlog] = useState<Blog | null>(null)
+  const [categories, setCategories] = useState<string[]>([])
+  const [activeCategory, setActiveCategory] = useState<string>("Todos")
+  const [searchTerm, setSearchTerm] = useState<string>("")
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const res = await axios.get("http://localhost:8000/blogs")
         setBlogs(res.data)
+
+        // Extraer categorías únicas de los blogs
+        const uniqueCategories = [
+          "Todos",
+          ...Array.from(
+            new Set(
+              res.data
+                .map((blog: Blog) => blog.category)
+                .filter((cat: string | undefined): cat is string => typeof cat === "string" && Boolean(cat))
+            )
+          ) as string[],
+        ]
+        setCategories(uniqueCategories)
       } catch (error) {
         console.error("Error al cargar blogs:", error)
       } finally {
@@ -59,9 +76,18 @@ export default function PublicBlogList() {
     }
   }, [selectedBlog])
 
+  // Filtrar blogs por categoría y término de búsqueda
+  const filteredBlogs = blogs.filter((blog) => {
+    const matchesCategory = activeCategory === "Todos" || blog.category === activeCategory
+    const matchesSearch =
+      blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      blog.description.toLowerCase().includes(searchTerm.toLowerCase())
+    return matchesCategory && matchesSearch
+  })
+
   if (loading) {
     return (
-      <div>
+      <div className="page-wrapper">
         <NavbarComponent />
         <div className="blog-container">
           <div className="loading-spinner">
@@ -79,21 +105,69 @@ export default function PublicBlogList() {
       <NavbarComponent />
 
       <main className="blog-container">
-        <header className="blog-header1">
-          <h1 className="blog-title1">Blog Logístico de México</h1>
-          <p className="blog-subtitle1">Soluciones y Casos de Éxito OLT</p>
-          <p className="blog-subtitle1">Descubre las últimas publicaciones y mantente al día con nuestro contenido</p>
+        <header className="blog-header">
+          <h1 className="blog-title">Blog Logístico de México</h1>
+          <p className="blog-subtitle">Soluciones y Casos de Éxito OLT</p>
+          <p className="blog-subtitle">Descubre las últimas publicaciones y mantente al día con nuestro contenido</p>
         </header>
 
-        {blogs.length === 0 ? (
+        <div className="blog-filters">
+          <div className="category-filters">
+            {categories.map((category) => (
+              <button
+                key={category}
+                className={`category-filter ${activeCategory === category ? "active" : ""}`}
+                onClick={() => setActiveCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Buscar artículos..."
+              className="search-input"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button className="search-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {filteredBlogs.length === 0 ? (
           <div className="empty-state">
             <h3>No hay publicaciones disponibles</h3>
-            <p>Vuelve pronto para ver nuevo contenido</p>
+            <p>No se encontraron artículos que coincidan con tu búsqueda</p>
+            <button
+              className="reset-button"
+              onClick={() => {
+                setActiveCategory("Todos")
+                setSearchTerm("")
+              }}
+            >
+              Restablecer filtros
+            </button>
           </div>
         ) : (
           <div className="blog-grid">
-            {blogs.map((blog) => (
-              <article key={blog.id} className="blog-card">
+            {filteredBlogs.map((blog) => (
+              <article key={blog.id} className="blog-card" onClick={() => openModal(blog)}>
                 {blog.image && (
                   <div className="blog-card-image">
                     <img
@@ -101,6 +175,7 @@ export default function PublicBlogList() {
                       alt={blog.title}
                       loading="lazy"
                     />
+                    {blog.category && <span className="blog-category-badge">{blog.category}</span>}
                   </div>
                 )}
 
@@ -109,7 +184,10 @@ export default function PublicBlogList() {
                   <p className="blog-card-description">{blog.description}</p>
 
                   <div className="blog-card-footer">
-                    <button className="read-more-btn" onClick={() => openModal(blog)}>
+                    <div className="blog-card-meta">
+                      <span className="blog-date">{blog.date || "Publicado recientemente"}</span>
+                    </div>
+                    <button className="read-more-btn">
                       Leer más
                       <svg className="arrow-icon" viewBox="0 0 20 20" fill="currentColor">
                         <path
@@ -125,6 +203,18 @@ export default function PublicBlogList() {
             ))}
           </div>
         )}
+
+        <div className="pagination">
+          <button className="pagination-btn" disabled>
+            Anterior
+          </button>
+          <div className="pagination-numbers">
+            <button className="pagination-number active">1</button>
+            <button className="pagination-number">2</button>
+            <button className="pagination-number">3</button>
+          </div>
+          <button className="pagination-btn">Siguiente</button>
+        </div>
       </main>
 
       <FooterComponent />
@@ -157,12 +247,13 @@ export default function PublicBlogList() {
               <div className="modal-hero-content">
                 <h1 className="modal-title">{selectedBlog.title}</h1>
                 <div className="modal-meta">
-                  <span className="modal-badge">Artículo</span>
-                  <span className="modal-date">Publicado recientemente</span>
+                  {selectedBlog.category && <span className="modal-badge">{selectedBlog.category}</span>}
+                  <span className="modal-date">{selectedBlog.date || "Publicado recientemente"}</span>
                 </div>
                 <p className="modal-description">{selectedBlog.description}</p>
 
-
+                <div className="modal-actions">
+                </div>
               </div>
             </div>
           </div>
