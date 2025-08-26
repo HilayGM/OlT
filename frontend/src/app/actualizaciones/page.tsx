@@ -25,7 +25,7 @@ export default function PublicBlogList() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await axios.get("http://137.184.40.168:8000/blogs")
+        const res = await axios.get("http://localhost:8000/blogs")
         setBlogs(res.data)
 
         // Extraer categorías únicas de los blogs

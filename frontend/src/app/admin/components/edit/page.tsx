@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import axios from 'axios';
 
-const URI = 'http://137.184.40.168:8000/blogs/';
+const URI = 'http://localhost:8000/blogs/';
 
 const CompEditBlog: React.FC = () => {
   const [title, setTitle] = useState('');
