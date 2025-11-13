@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  # Definición de tu único servicio: el frontend
+  frontend:
+    # Usa la misma configuración de build que funcionó antes:
+    build:
+      context: ./frontend  # Carpeta donde está el Dockerfile (relativa a docker-compose.yml)
+      dockerfile: dockerfile 
+    
+    # Nombre para el contenedor
+    container_name: olt-frontend-app-3523110349
+
+    # Mapeo de puertos (Puerto local 3000 -> Puerto contenedor 3000)
+    ports:
+      - "3000:3000"
+      
+    # Configuración de reinicio
+    restart: always

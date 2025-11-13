@@ -1,0 +1,26 @@
+FROM node:18-alpine AS builder
+WORKDIR /app
+
+# Copia package.json y package-lock.json si existe, instala dependencias
+COPY package*.json ./
+RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+# Copia el código y genera el build de producción
+COPY . .
+RUN npm run build
+
+# Stage de producción ligero
+FROM node:18-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+
+# Copia sólo lo necesario desde el builder
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/node_modules ./node_modules
+
+EXPOSE 3000
+CMD ["npm", "start"]
+
+

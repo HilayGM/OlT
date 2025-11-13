@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { useBlogs } from "../../hooks/useBlog"
 import "./edit-blog.css"
@@ -22,8 +22,22 @@ export default function EditBlogPage() {
   const [loadingBlog, setLoadingBlog] = useState(true)
 
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const blogId = searchParams.get("id")
+  // Evita usar useSearchParams() para no requerir un Suspense boundary.
+  const [blogId, setBlogId] = useState<string | null>(null)
+
+  useEffect(() => {
+    const getId = () => {
+      if (typeof window === "undefined") return null
+      return new URLSearchParams(window.location.search).get("id")
+    }
+
+    setBlogId(getId())
+
+    // Actualiza si el usuario navega con atrás/adelante
+    const onPop = () => setBlogId(getId())
+    window.addEventListener("popstate", onPop)
+    return () => window.removeEventListener("popstate", onPop)
+  }, [])
   const { blogs, getBlogById, updateBlog } = useBlogs()
 
   useEffect(() => {
